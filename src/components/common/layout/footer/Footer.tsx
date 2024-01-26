@@ -194,7 +194,7 @@ const TopFooter = () => {
 const Footer = () => {
   return (
     <Container maxW="full" p={0} borderTop="1px" borderColor="gray.300">
-      <Container maxW="container.2xl" px={"50px"} py="30px">
+      <Container maxW="container.xl" px={"20px"} py="30px">
         <TopFooter />
       </Container>
       <BottomFooter />
