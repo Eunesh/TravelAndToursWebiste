@@ -6,7 +6,7 @@ import MiscellaneousRoutes from "../features/miscellaneous/routes/MiscellaneousR
 const Router = () => {
   return (
     <Routes>
-      <Route path="/more" element={<MiscellaneousRoutes />} />
+      <Route path="/more/*" element={<MiscellaneousRoutes />} />
       <Route path="/*" element={<PageNotFound />} />
     </Routes>
   );
