@@ -1,8 +1,8 @@
 import React from "react";
 import { Avatar, Container, Divider, Flex, Text } from "@chakra-ui/react";
-import logo from "../../../../assets/images/logo.png";
-import NavItems from "./NavItems";
 import { Link } from "react-router-dom";
+import NavItems from "./NavItems";
+import logo from "../../../../assets/images/logo.png";
 
 const Header = () => {
   return (
