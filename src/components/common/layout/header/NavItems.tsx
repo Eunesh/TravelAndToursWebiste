@@ -7,6 +7,7 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import React, { FC } from "react";
+import { Link } from "react-router-dom";
 
 const data = [
   {
@@ -82,26 +83,30 @@ const NavItems = () => {
         </React.Fragment>
       ))}
 
-      <Button
-        px={4}
-        py={2}
-        colorScheme="yellow"
-        variant="ghost"
-        sx={{ background: "none" }}
-        _hover={{ bg: "yellow.100", borderBottom: "2px solid yellow.500" }}
-      >
-        Contact Us
-      </Button>
-      <Button
-        px={4}
-        py={2}
-        colorScheme="yellow"
-        variant="ghost"
-        sx={{ background: "none" }}
-        _hover={{ bg: "yellow.100", borderBottom: "2px solid yellow.500" }}
-      >
-        About Us
-      </Button>
+      <Link to="/more/contact-us">
+        <Button
+          px={4}
+          py={2}
+          colorScheme="yellow"
+          variant="ghost"
+          sx={{ background: "none" }}
+          _hover={{ bg: "yellow.100", borderBottom: "2px solid yellow.500" }}
+        >
+          Contact Us
+        </Button>
+      </Link>
+      <Link to="/more/about-us">
+        <Button
+          px={4}
+          py={2}
+          colorScheme="yellow"
+          variant="ghost"
+          sx={{ background: "none" }}
+          _hover={{ bg: "yellow.100", borderBottom: "2px solid yellow.500" }}
+        >
+          About Us
+        </Button>
+      </Link>
     </Flex>
   );
 };
