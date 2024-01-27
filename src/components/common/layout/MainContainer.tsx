@@ -6,7 +6,7 @@ interface IMainContainer {
 }
 const MainContainer: FC<IMainContainer> = ({ children }) => {
   return (
-    <Container maxW="full">
+    <Container maxW="full" marginTop="70px">
       <Container maxW="container.xl" py={{ base: "30px", md: "50px" }}>
         {children}
       </Container>

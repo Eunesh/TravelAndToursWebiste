@@ -6,7 +6,7 @@ import logo from "../../../../assets/images/logo.png";
 
 const Header = () => {
   return (
-    <Container maxW="full" borderBottom="1px" borderColor="gray.300">
+    <Container maxW="full" borderBottom="1px" borderColor="gray.300" position='fixed' bg="white" top="0">
       <Container maxW="container.xl" py="10px">
         <Flex justifyContent="space-between" alignItems="center">
           <Link to="/">
