@@ -8,43 +8,7 @@ import {
 } from "@chakra-ui/react";
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-
-const data = [
-  {
-    title: "Places to go",
-    subLinks: [
-      {
-        title: "Pokhara",
-        link: "/places/pokhara",
-      },
-      {
-        title: "Chitwan",
-        link: "/places/pokhara",
-      },
-      {
-        title: "Lumbini",
-        link: "/places/pokhara",
-      },
-    ],
-  },
-  {
-    title: "Things to do",
-    subLinks: [
-      {
-        title: "Rafting",
-        link: "/places/pokhara",
-      },
-      {
-        title: "Surfing",
-        link: "/places/pokhara",
-      },
-      {
-        title: "Jungle Safari",
-        link: "/places/pokhara",
-      },
-    ],
-  },
-];
+import { navData } from "./navData";
 
 interface INavItem {
   title: string;
@@ -77,7 +41,7 @@ const NavItem: FC<INavItem> = ({ title, subLinks }) => {
 const NavItems = () => {
   return (
     <Flex alignItems="center" gap={2}>
-      {data.map((item) => (
+      {navData.map((item) => (
         <React.Fragment key={item.title}>
           <NavItem title={item.title} subLinks={item.subLinks} />
         </React.Fragment>
