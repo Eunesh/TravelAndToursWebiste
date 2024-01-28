@@ -1,12 +1,12 @@
 import React from "react";
+import { Stack } from "@chakra-ui/react";
 import SectionTitle from "./SectionTitle";
-import { Box } from "@chakra-ui/react";
 
 const PlacesToGoSection = () => {
   return (
-    <Box>
+    <Stack spacing={5}>
       <SectionTitle title="Must visit places" />
-    </Box>
+    </Stack>
   );
 };
 
