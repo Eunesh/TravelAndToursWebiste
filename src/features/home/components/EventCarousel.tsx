@@ -1,12 +1,5 @@
 import React, { FC } from "react";
-import {
-  Card,
-  CardBody,
-  Divider,
-  Heading,
-  Image,
-  Stack,
-} from "@chakra-ui/react";
+import { Card, Heading, Image, Stack } from "@chakra-ui/react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -39,53 +32,46 @@ const CarouselItem: FC<ICarouselItem> = ({ image, title, link }) => {
   return (
     <Card
       maxW="md"
-      bg="#fafafa"
       m={"0 10px"}
+      boxShadow={"none"}
       onClick={handleClick}
       cursor="pointer"
       title={"Go to page."}
+      as={Stack}
+      spacing={5}
     >
-      <CardBody as={Stack} spacing={5}>
-        <Image
-          h="300px"
-          src={image}
-          alt={title}
-          borderRadius="lg"
-          objectFit={"cover"}
-        />
-        <Divider />
-        <Heading size="md" sx={{ "&:hover": { textDecoration: "underline" } }}>
-          <Link to={link}>{title}</Link>
-        </Heading>
-      </CardBody>
+      <Image h="300px" src={image} alt={title} objectFit={"cover"} />
+      <Heading size="md" sx={{ "&:hover": { textDecoration: "underline" } }}>
+        <Link to={link}>{title}</Link>
+      </Heading>
     </Card>
   );
 };
-const HighlightCarousel = () => {
+const EventCarousel = () => {
   return (
     <Carousel responsive={responsive} infinite={true}>
       <CarouselItem
-        image="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/8c/76/6e/pokhara-paragliding.jpg?w=1200&h=-1&s=1"
-        title="Explore Pokhara"
+        image="https://nepaldesk.com/sites/default/files/2023-11/Tihar%20%28Deepawali%29_1.jpg"
+        title="Dashain Tihar"
         link="/places/pokhara"
       />
       <CarouselItem
-        image="https://nepaltraveller.com/images/main/1686125690.sidetrackimage7.jpg"
-        title="Chitwan National Park"
+        image="https://www.drishtiias.com/images/uploads/1667468445_image1.png"
+        title="Chat parva"
         link="/places/pokhara"
       />
       <CarouselItem
-        image="https://nepaltraveller.com/images/main/1605092930.sidetrackimagebutwal.jpg"
-        title="Beautiful Butwal"
+        image="https://myrepublica.nagariknetwork.com/uploads/media/2019/January/Sakela-Udhauli.jpg"
+        title="Udhauli Ubhauli"
         link="/places/pokhara"
       />
       <CarouselItem
-        image="https://holidaystonepal.com/media/files/Blogs/Mustang_valley.jpeg"
-        title="Majestic Mustang"
+        image="https://www.discoveraltitude.com/uploads/img/monks-recite-during-the-buddha-jayanti-festival.webp"
+        title="Buddha Jayanti"
         link="/places/pokhara"
       />
     </Carousel>
   );
 };
 
-export default HighlightCarousel;
+export default EventCarousel;
