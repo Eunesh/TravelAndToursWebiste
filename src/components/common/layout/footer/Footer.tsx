@@ -158,7 +158,10 @@ const QuickLinks = () => {
 
 const TopFooterLinks = () => {
   return (
-    <Flex gap={20}>
+    <Flex
+      gap={{ base: 20, lg: 10, xl: 20 }}
+      direction={{ base: "column", md: "row" }}
+    >
       <FindUsOnLinks />
       <MoreFromUsLinks />
       <QuickLinks />
@@ -168,14 +171,18 @@ const TopFooterLinks = () => {
 
 const TopFooter = () => {
   return (
-    <Flex gap={100}>
+    <Flex gap={{ base: 50, xl: 100 }} direction={{ base: "column", lg: "row" }}>
       <Flex gap={10}>
         <Stack spacing={10}>
           <Flex gap={5} alignItems="center">
             <Avatar size="xl" name="Dan Abrahmov" src={logo} />
             <Text fontSize="2xl">Travel.com</Text>
           </Flex>
-          <Text color="gray.400" maxW="400px" textAlign={"justify"}>
+          <Text
+            color="gray.400"
+            maxW={{ base: "full", lg: "400px" }}
+            textAlign={"justify"}
+          >
             Nepal Tourism Board is a national tourism organization of Nepal
             established in 1998 by an Act of Parliament in the form of
             partnership between the Government of Nepal and private sector
@@ -183,7 +190,7 @@ const TopFooter = () => {
             tourist destination.
           </Text>
         </Stack>
-        <Divider orientation="vertical" />
+        <Divider orientation={"vertical"} />
       </Flex>
 
       <TopFooterLinks />

@@ -13,15 +13,23 @@ const PageNotFound = () => {
     navigate(-1);
   };
   return (
-    <Center h="80vh" gap={10}>
-      <Stack spacing={2}>
-        <Text fontSize="2xl" fontWeight="700" color="blue.500">
+    <Center
+      minH="80vh"
+      gap={10}
+      flexDirection={{ base: "column-reverse", md: "row" }}
+    >
+      <Stack spacing={2} p={"30px"}>
+        <Text
+          fontSize={{ base: "xl", md: "2xl" }}
+          fontWeight="700"
+          color="blue.500"
+        >
           404 Error
         </Text>
-        <Text fontSize="5xl" fontWeight="600">
+        <Text fontSize={{ base: "2xl", md: "4xl", lg: "5xl" }} fontWeight="600">
           Page not found
         </Text>
-        <Text color="gray.500" fontSize="xl">
+        <Text color="gray.500" fontSize={{ base: "md", md: "xl" }}>
           Sorry the page you are looking for cannot be found or has been
           removed.
         </Text>
@@ -37,7 +45,9 @@ const PageNotFound = () => {
           </Button>
         </Box>
       </Stack>
-      <Lottie animationData={lottie_file} loop={true} />
+      <Box w={{ base: "300px", md: "auto" }}>
+        <Lottie animationData={lottie_file} loop={true} />
+      </Box>
     </Center>
   );
 };
