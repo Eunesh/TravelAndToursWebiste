@@ -1,9 +1,13 @@
-import React from 'react'
+import { Box } from "@chakra-ui/react";
+import React from "react";
+import SectionTitle from "./SectionTitle";
 
 const HighlightSection = () => {
   return (
-    <div>HighlightSection</div>
-  )
-}
+    <Box>
+      <SectionTitle title="Higlights of Nepal" />
+    </Box>
+  );
+};
 
-export default HighlightSection
+export default HighlightSection;
