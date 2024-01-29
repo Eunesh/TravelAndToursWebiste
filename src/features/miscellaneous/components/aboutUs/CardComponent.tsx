@@ -23,7 +23,7 @@ const CardComponent = ({ title, body }: propstype) => {
     <CardContainer>
       <CardBody>
         <Stack gap={"10px"}>
-          <Text fontSize={"xl"} fontWeight={"bold"}>
+          <Text fontSize={"md"} fontWeight={"bold"}>
             {title}
           </Text>
           <Text fontSize={"sm"}>{body}</Text>

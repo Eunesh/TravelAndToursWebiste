@@ -4,7 +4,7 @@ import ContactusLocation from "../components/contactUs/ContactusLocation";
 
 const Contactus = () => {
   return (
-    <Stack>
+    <Stack spacing={"20px"}>
       <ContactusForm />
       <ContactusLocation />
     </Stack>

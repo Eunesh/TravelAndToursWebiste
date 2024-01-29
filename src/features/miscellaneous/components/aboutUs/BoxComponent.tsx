@@ -5,7 +5,7 @@ const BoxComponent = () => {
   return (
     <Stack width={"100%"} h={"100%"} gap={"40px"} padding={"30px"}>
       <Stack gap={"10px"}>
-        <Text fontSize={"xl"} fontWeight={"bold"}>
+        <Text fontSize={"3xl"} fontWeight={"bold"}>
           About Us
         </Text>
         <Text fontSize={"sm"}>
@@ -16,7 +16,7 @@ const BoxComponent = () => {
         </Text>
       </Stack>
       <Link to="/more/contact-us">
-        <Text fontSize={"2xl"} color={"purple"}>
+        <Text fontSize={"xl"} color={"purple"}>
           Contact Us | FAQ
         </Text>
       </Link>
