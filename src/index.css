@@ -11,3 +11,13 @@
 .dancing-font {
   font-family: 'Dancing Script', cursive;
 }
+
+.socials-icon {
+  cursor: pointer;
+  font-size: 40px !important;
+  
+}
+.socials-icon:hover {
+  transform: translateY(-10px);
+  transition: all 200ms;
+}
