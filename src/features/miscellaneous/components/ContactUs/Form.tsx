@@ -9,7 +9,11 @@ import {
   Button,
 } from "@chakra-ui/react";
 
+import { ContactusSchema } from "../../schemas/ContactusSchema";
+
 import { useFormik } from "formik";
+
+import emailjs from "@emailjs/browser";
 
 const Form = () => {
   const formik = useFormik({
@@ -18,13 +22,29 @@ const Form = () => {
       email: "",
       message: "",
     },
-    onSubmit: (values) => {
+    validationSchema: ContactusSchema,
+    onSubmit: async (values) => {
       console.log(values);
+      emailjs
+        .send(
+          import.meta.env.VITE_EMAIL_SERVICE,
+          import.meta.env.VITE_EMAIL_TEMPLATE,
+          values,
+          import.meta.env.VITE_EMAIL_API
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
     },
   });
   return (
-    <Stack spacing={"40px"} width={"30vw"}>
-      <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit}>
+      <Stack spacing={"40px"} width={"25vw"}>
         <FormControl isRequired>
           <FormLabel>Name</FormLabel>
           <Input
@@ -37,7 +57,7 @@ const Form = () => {
           {/* <FormHelperText>Please dont leave Name field empty</FormHelperText> */}
         </FormControl>
         <FormControl isRequired>
-          <FormLabel>Email</FormLabel>
+          <FormLabel htmlFor="email">Email</FormLabel>
           <Input
             type="email"
             id="email"
@@ -49,12 +69,20 @@ const Form = () => {
         </FormControl>
         <FormControl isRequired>
           <FormLabel>Message</FormLabel>
-          <Textarea size="sm" />
+          <Textarea
+            size="sm"
+            id="message"
+            name="message"
+            value={formik.values.message}
+            onChange={formik.handleChange}
+          />
           {/* <FormHelperText>Please dont leave Name field empty</FormHelperText> */}
         </FormControl>
-      </form>
-      <Button size="lg">Send Message</Button>
-    </Stack>
+        <Button size="lg" type="submit">
+          Send Message
+        </Button>
+      </Stack>
+    </form>
   );
 };
 

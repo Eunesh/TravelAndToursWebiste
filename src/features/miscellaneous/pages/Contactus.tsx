@@ -1,6 +1,6 @@
 import { Stack } from "@chakra-ui/react";
 import ContactusForm from "../components/ContactUs/ContactusForm";
-import ContactusLocation from "../components/ContactusLocation";
+import ContactusLocation from "../components/ContactUs/ContactusLocation";
 
 const Contactus = () => {
   return (
