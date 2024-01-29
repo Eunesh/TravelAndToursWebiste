@@ -2,7 +2,6 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  FormHelperText,
   Input,
   Stack,
   Textarea,
@@ -23,6 +22,7 @@ const Form = () => {
       message: "",
     },
     validationSchema: ContactusSchema,
+    enableReinitialize: true,
     onSubmit: async (values) => {
       console.log(values);
       emailjs
@@ -45,7 +45,9 @@ const Form = () => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Stack spacing={"40px"}>
-        <FormControl isRequired>
+        <FormControl
+          isInvalid={Boolean(formik.touched.name && formik.errors.name)}
+        >
           <FormLabel>Name</FormLabel>
           <Input
             type="name"
@@ -53,21 +55,30 @@ const Form = () => {
             name="name"
             value={formik.values.name}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
-          {/* <FormHelperText>Please dont leave Name field empty</FormHelperText> */}
+          {formik.errors.name && (
+            <FormErrorMessage>{formik.errors.name}</FormErrorMessage>
+          )}
         </FormControl>
-        <FormControl isRequired>
+        <FormControl
+          isInvalid={Boolean(formik.touched.email && formik.errors.email)}
+        >
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input
-            type="email"
             id="email"
             name="email"
             value={formik.values.email}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
-          {/* <FormHelperText>Please dont leave Name field empty</FormHelperText> */}
+          {formik.errors.email && (
+            <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
+          )}
         </FormControl>
-        <FormControl isRequired>
+        <FormControl
+          isInvalid={Boolean(formik.touched.message && formik.errors.message)}
+        >
           <FormLabel>Message</FormLabel>
           <Textarea
             size="sm"
@@ -75,8 +86,11 @@ const Form = () => {
             name="message"
             value={formik.values.message}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
-          {/* <FormHelperText>Please dont leave Name field empty</FormHelperText> */}
+          {formik.errors.message && (
+            <FormErrorMessage>{formik.errors.message}</FormErrorMessage>
+          )}
         </FormControl>
         <Button size="lg" type="submit">
           Send Message
