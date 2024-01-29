@@ -1,4 +1,3 @@
-import React from "react";
 import { Stack, Text } from "@chakra-ui/react";
 import Socials from "../../../components/common/miscellaneous/Socials";
 import FourImageGrid from "../../../components/common/miscellaneous/FourImageGrid";
