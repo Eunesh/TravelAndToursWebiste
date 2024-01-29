@@ -1,11 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import Contactus from "../pages/Contactus";
+import MainContainer from "../../../components/common/layout/MainContainer";
 
 const MiscellaneousRoutes = () => {
   return (
-    <Routes>
-      <Route path="contact-us" element={<Contactus />} />
-    </Routes>
+    <MainContainer>
+      <Routes>
+        <Route path="contact-us" element={<Contactus />} />
+      </Routes>
+    </MainContainer>
   );
 };
 
