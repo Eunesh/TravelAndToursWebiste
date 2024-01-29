@@ -51,6 +51,7 @@ const AdminLoginForm = () => {
               <Input
                 name="email"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.email}
                 errorBorderColor="red.500"
                 placeholder="Email Address"
@@ -68,6 +69,7 @@ const AdminLoginForm = () => {
             <PasswordInput
               name="password"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.password}
               errorBorderColor="red.500"
               placeholder="Password"
