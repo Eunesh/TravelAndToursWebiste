@@ -1,11 +1,11 @@
 import { Flex } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 // Icons
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import EmailIcon from "@mui/icons-material/Email";
 import XIcon from "@mui/icons-material/X";
-import { Link } from "react-router-dom";
 // Icons
 
 const Socials = () => {
