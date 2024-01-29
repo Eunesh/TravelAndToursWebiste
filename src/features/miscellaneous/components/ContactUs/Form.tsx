@@ -44,7 +44,7 @@ const Form = () => {
   });
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Stack spacing={"40px"} width={"25vw"}>
+      <Stack spacing={"40px"}>
         <FormControl isRequired>
           <FormLabel>Name</FormLabel>
           <Input
