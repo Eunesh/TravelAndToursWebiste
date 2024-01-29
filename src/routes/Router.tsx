@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import PageNotFound from "../features/404/pages/PageNotFound";
 import MiscellaneousRoutes from "../features/miscellaneous/routes/MiscellaneousRoutes";
