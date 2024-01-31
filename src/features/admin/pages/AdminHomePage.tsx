@@ -1,7 +1,10 @@
-import React from "react";
+import { Text } from "@chakra-ui/react";
+import AdminPagesLayout from "../components/layout/AdminPagesLayout";
 
 const AdminHomePage = () => {
-  return <div>AdminHomePage</div>;
+  return <AdminPagesLayout>
+    <Text>Hello Boss</Text>
+  </AdminPagesLayout>;
 };
 
 export default AdminHomePage;
