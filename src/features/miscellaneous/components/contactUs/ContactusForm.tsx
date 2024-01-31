@@ -10,7 +10,7 @@ const ContactusForm = () => {
       >
         <Image
           objectFit="cover"
-          src="https://hips.hearstapps.com/hmg-prod/images/moraine-lake-with-alpen-glow-on-ten-peaks-banff-royalty-free-image-1682543414.jpg"
+          src="https://www.searchenginejournal.com/wp-content/uploads/2022/08/contact-us-2-62fa2cc2edbaf-sej.png"
           minW={"300px"}
           h="100%"
         />
