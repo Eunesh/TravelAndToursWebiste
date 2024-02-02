@@ -10,18 +10,15 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { AdminLoginType } from "../../types/adminTypes";
 
 // ICON
 import EmailIcon from "@mui/icons-material/Email";
 import PasswordInput from "../../../../components/common/form/PasswordInput";
 import loginSchema from "../../schemas/loginSchema";
-import { useNavigate } from "react-router-dom";
+import { loginAdminFN } from "../../query/AuthQueries";
 // ICON
-
-type LoginValues = {
-  email: string;
-  password: string;
-};
 
 const AdminLoginForm = () => {
   const navigate = useNavigate();
@@ -29,8 +26,8 @@ const AdminLoginForm = () => {
     validationSchema: loginSchema,
     initialValues: { email: "", password: "" },
     enableReinitialize: true,
-    onSubmit: (values: LoginValues) => {
-      console.log(values);
+    onSubmit: async (values: AdminLoginType) => {
+      await loginAdminFN(values).then(res => console.log(res))
       navigate("/admin/");
     },
   });
