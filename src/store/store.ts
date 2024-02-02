@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import sessionSlice from "../features/admin/slice/sessionSlice";
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    session: sessionSlice,
+  },
 });
 
 export default store;
