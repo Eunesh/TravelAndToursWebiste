@@ -4,7 +4,7 @@ import { SessionAdminType } from "../features/admin/types/adminTypes";
 const cookie = new Cookies();
 
 export const clearSession = () => {
-  cookie.remove("_interslice_session");
+  cookie.remove("admin_session", { path: "/" });
   sessionStorage.removeItem("admin");
 };
 
