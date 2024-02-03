@@ -18,17 +18,28 @@ import EmailIcon from "@mui/icons-material/Email";
 import PasswordInput from "../../../../components/common/form/PasswordInput";
 import loginSchema from "../../schemas/loginSchema";
 import { loginAdminFN } from "../../query/AuthQueries";
+import { useDispatch } from "react-redux";
+import { setAdminSession } from "../../slice/sessionSlice";
+import { toast } from "react-toastify";
 // ICON
 
 const AdminLoginForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formik = useFormik({
     validationSchema: loginSchema,
     initialValues: { email: "", password: "" },
     enableReinitialize: true,
-    onSubmit: async (values: AdminLoginType) => {
-      await loginAdminFN(values).then(res => console.log(res))
-      navigate("/admin/");
+    onSubmit: (values: AdminLoginType) => {
+      loginAdminFN(values)
+        .then((res) => res.data)
+        .then((data) => {
+          dispatch(setAdminSession(data.admin));
+          navigate("/admin/protected");
+        })
+        .catch((error) => {
+          toast.error(error.message);
+        });
     },
   });
   return (

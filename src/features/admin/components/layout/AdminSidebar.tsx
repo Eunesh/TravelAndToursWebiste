@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {
   Avatar,
   Box,
@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 
+import { clearAdminSession } from "../../slice/sessionSlice";
 import logo from "../../../../assets/images/logo.png";
 
 // ICONS
@@ -20,6 +21,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { useNavigate } from "react-router-dom";
 // ICONS
 
 const SidebarContainer = styled(Stack)(
@@ -129,8 +131,10 @@ const AdminSidebar: FC<IAdminSidebar> = ({
   delayedMinimized,
   toogleMinimized,
 }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = () => {
+    dispatch(clearAdminSession());
     navigate("/admin/login");
   };
   return (
