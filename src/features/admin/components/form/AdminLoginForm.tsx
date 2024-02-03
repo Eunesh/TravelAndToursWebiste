@@ -10,7 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AdminLoginType } from "../../types/adminTypes";
 
 // ICON
@@ -89,6 +89,16 @@ const AdminLoginForm = () => {
           <Button type="submit">Submit</Button>
         </Stack>
       </form>
+      <Text
+        mt={"16px"}
+        color="blue.700"
+        textDecoration={"underline"}
+        textAlign={"right"}
+      >
+        <Link to="/" style={{ marginTop: "20px" }}>
+          Go to home page
+        </Link>
+      </Text>
     </Box>
   );
 };
