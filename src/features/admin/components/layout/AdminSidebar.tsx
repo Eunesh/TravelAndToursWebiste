@@ -19,6 +19,7 @@ import PlaceIcon from "@mui/icons-material/Place";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import MenuIcon from "@mui/icons-material/Menu";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // ICONS
 
 const SidebarContainer = styled(Stack)(
@@ -163,7 +164,7 @@ const AdminSidebar: FC<IAdminSidebar> = ({
               onClick={toogleMinimized}
               boxSize={"3rem"}
             >
-              <MenuIcon />
+              {delayedMinimized ? <KeyboardArrowRightIcon /> : <MenuIcon />}
             </Button>
           </Flex>
           <Divider sx={{ background: "#CBD5E0" }} />
