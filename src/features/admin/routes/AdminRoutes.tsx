@@ -1,12 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import AdminLoginPage from "../pages/AdminLoginPage";
+import AdminPagesLayout from "../components/layout/AdminPagesLayout";
+import useMaintainSession from "../hooks/useMaintainSession";
 import AdminHomePage from "../pages/AdminHomePage";
 
 const AdminRoutes = () => {
+  // This hook is used to refetch admin session from session storage on every page refresh.
+  useMaintainSession();
   return (
     <Routes>
       <Route path="login" element={<AdminLoginPage />} />
-      <Route path="/" element={<AdminHomePage />} />
+      <Route path="protected" element={<AdminPagesLayout />}>
+        <Route path="" element={<AdminHomePage />} />
+      </Route>
     </Routes>
   );
 };

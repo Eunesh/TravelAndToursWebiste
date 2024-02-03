@@ -13,5 +13,5 @@ export const setSessionAdmin = (admin: SessionAdminType) => {
 };
 
 export const getSessionAdmin = () => {
-  return JSON.parse(sessionStorage.getItem("admin") || "{}");
+  return JSON.parse(sessionStorage.getItem("admin") || "null");
 };

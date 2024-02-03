@@ -6,6 +6,7 @@ import { AdminSessionType, SetSessionAT } from "../types/adminSessionTypes";
 const initialState: AdminSessionType = {
   admin: null,
   isLoggedIn: false,
+  isLoading: true,
 };
 
 const sessionSlice = createSlice({
@@ -16,18 +17,26 @@ const sessionSlice = createSlice({
       setSessionAdmin(action.payload);
       state.isLoggedIn = true;
       state.admin = action.payload;
+      state.isLoading = false;
       return state;
     },
     clearAdminSession: (state: AdminSessionType) => {
       clearSession();
       state.isLoggedIn = false;
       state.admin = null;
+      state.isLoading = false;
       return state;
     },
   },
 });
 
 // Selectors
+export const selectSession = (state: any) => {
+  return state.session;
+};
+export const selectSessionIsLoading = (state: any) => {
+  return state.session.isLoading;
+};
 export const selectIsLoggedIn = (state: any) => {
   return state.session.isLoggedIn;
 };

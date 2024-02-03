@@ -3,6 +3,7 @@ import { SessionAdminType } from "./adminTypes";
 export type AdminSessionType = {
   admin: SessionAdminType | null;
   isLoggedIn: boolean;
+  isLoading: boolean;
 };
 
 // Session Action Types
