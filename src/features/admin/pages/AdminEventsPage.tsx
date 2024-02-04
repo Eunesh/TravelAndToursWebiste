@@ -1,16 +1,16 @@
 import { Stack } from "@chakra-ui/react";
 import PageTitle from "../components/layout/PageTitle";
-import PlacesGrid from "../components/grid/places/PlacesGrid";
+import EventsGrid from "../components/grid/events/EventsGrid";
 import CustDivider from "../../../components/common/miscellaneous/CustDivider";
 
-const AdminHomePage = () => {
+const AdminEventsPage = () => {
   return (
     <Stack spacing={4}>
-      <PageTitle title="Manage Your Places" />
+      <PageTitle title="Manage Your Events" />
       <CustDivider />
-      <PlacesGrid />
+      <EventsGrid />
     </Stack>
   );
 };
 
-export default AdminHomePage;
+export default AdminEventsPage;
