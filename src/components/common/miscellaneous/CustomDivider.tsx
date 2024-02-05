@@ -1,17 +1,17 @@
 import { FC } from "react";
 import { Box } from "@chakra-ui/react";
 
-interface ICustDivider {
+interface ICustomDivider {
   color?: string;
   breadth?: string;
 }
-const CustDivider: FC<ICustDivider> = ({ color, breadth }) => {
+const CustomDivider: FC<ICustomDivider> = ({ color, breadth }) => {
   return <Box bg={color} width={"full"} height={breadth} />;
 };
 
-CustDivider.defaultProps = {
+CustomDivider.defaultProps = {
   color: "gray.400",
   breadth: "1px",
 };
 
-export default CustDivider;
+export default CustomDivider;
