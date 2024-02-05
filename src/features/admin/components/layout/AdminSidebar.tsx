@@ -1,4 +1,5 @@
-import { FC } from "react";
+import React, { FC } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   Avatar,
@@ -21,8 +22,28 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { useNavigate } from "react-router-dom";
 // ICONS
+
+const sidebarLink = [
+  {
+    id: 1,
+    title: "Places",
+    icon: () => <PlaceIcon fontSize="large" />,
+    link: "/admin/protected",
+  },
+  {
+    id: 2,
+    title: "Events",
+    icon: () => <CalendarMonthIcon fontSize="large" />,
+    link: "/admin/protected/events",
+  },
+  {
+    id: 3,
+    title: "Miscellaneous",
+    icon: () => <DashboardIcon fontSize="large" />,
+    link: "/admin/protected/miscellaneous",
+  },
+];
 
 const SidebarContainer = styled(Stack)(
   ({ minimized }: { minimized: boolean }) => ({
@@ -46,6 +67,7 @@ interface INavigationItem {
   active: boolean;
   icon: () => React.ReactNode;
   title: string;
+  link: string;
   minimized: boolean;
   delayedMinimized: boolean;
 }
@@ -53,9 +75,14 @@ const NavigationItem: FC<INavigationItem> = ({
   active,
   icon,
   title,
+  link,
   minimized,
   delayedMinimized,
 }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(link);
+  };
   return (
     <Flex
       cursor="pointer"
@@ -73,6 +100,7 @@ const NavigationItem: FC<INavigationItem> = ({
       justifyContent={minimized ? "center" : "flex-start"}
       p={"10px 20px"}
       borderRadius={"lg"}
+      onClick={handleClick}
     >
       {icon()}
       {!minimized && <Text fontSize="lg">{!delayedMinimized && title}</Text>}
@@ -88,29 +116,21 @@ const NavigationLinks: FC<INavigationLinks> = ({
   minimized,
   delayedMinimized,
 }) => {
+  const { pathname } = useLocation();
   return (
     <Stack gap={2} px={"20px"}>
-      <NavigationItem
-        active={false}
-        icon={() => <PlaceIcon fontSize="large" />}
-        minimized={minimized}
-        delayedMinimized={delayedMinimized}
-        title="Places"
-      />
-      <NavigationItem
-        active={true}
-        icon={() => <CalendarMonthIcon fontSize="large" />}
-        minimized={minimized}
-        delayedMinimized={delayedMinimized}
-        title="Events"
-      />
-      <NavigationItem
-        active={false}
-        icon={() => <DashboardIcon fontSize="large" />}
-        minimized={minimized}
-        delayedMinimized={delayedMinimized}
-        title="Miscellaneous"
-      />
+      {sidebarLink.map((item) => (
+        <React.Fragment key={item.id}>
+          <NavigationItem
+            active={pathname == item.link}
+            icon={item.icon}
+            link={item.link}
+            minimized={minimized}
+            delayedMinimized={delayedMinimized}
+            title={item.title}
+          />
+        </React.Fragment>
+      ))}
     </Stack>
   );
 };

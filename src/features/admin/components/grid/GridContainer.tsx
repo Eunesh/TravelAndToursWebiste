@@ -15,10 +15,16 @@ const GridContainer: FC<IGridContainer> = ({ rowData, colDefs }) => {
       className="ag-theme-alpine"
       style={{
         width: "100%",
-        height: "600px",
+        height: "750px",
       }}
     >
-      <AgGridReact rowData={rowData} columnDefs={colDefs} />
+      <AgGridReact
+        rowData={rowData}
+        columnDefs={colDefs}
+        paginationPageSize={10}
+        paginationPageSizeSelector={[10, 20, 50]}
+        pagination={true}
+      />
     </div>
   );
 };
