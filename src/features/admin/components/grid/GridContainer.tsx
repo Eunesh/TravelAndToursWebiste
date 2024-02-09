@@ -2,7 +2,7 @@
 import { FC } from "react";
 import { AgGridReact } from "ag-grid-react"; // React Grid Logic
 import "ag-grid-community/styles/ag-grid.css"; // Core CSS
-import "ag-grid-community/styles/ag-theme-quartz.css"; // Theme
+import "ag-grid-community/styles/ag-theme-alpine.min.css"; // Theme
 import { CircularProgress, Flex, Text } from "@chakra-ui/react";
 
 const OnLoadingComponent = () => {
@@ -31,7 +31,7 @@ interface IGridContainer {
 const GridContainer: FC<IGridContainer> = ({ colDefs, onGridReady }) => {
   return (
     <div
-      className="ag-theme-alpine"
+      className="ag-theme-alpine-dark"
       style={{
         width: "100%",
         height: "750px",

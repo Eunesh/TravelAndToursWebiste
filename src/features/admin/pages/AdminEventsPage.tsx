@@ -10,8 +10,7 @@ const AdminEventsPage = () => {
       <PageTitle title="Manage Your Events" />
       <CustomDivider />
       <Stack spacing={2}>
-        <AddEventComponent />
-        <EventsGrid />
+        <EventsGrid topPlaceholder={<AddEventComponent />} />
       </Stack>
     </Stack>
   );

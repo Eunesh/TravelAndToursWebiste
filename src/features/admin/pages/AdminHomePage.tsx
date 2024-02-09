@@ -10,8 +10,7 @@ const AdminHomePage = () => {
       <PageTitle title="Manage Your Places" />
       <CustomDivider />
       <Stack spacing={2}>
-        <AddPlaceComponent />
-        <PlacesGrid />
+        <PlacesGrid topPlaceholder={<AddPlaceComponent />} />
       </Stack>
     </Stack>
   );
