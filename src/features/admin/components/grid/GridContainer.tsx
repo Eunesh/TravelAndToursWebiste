@@ -1,15 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from "react";
-import { AgGridReact } from "ag-grid-react";
+import { AgGridReact } from "ag-grid-react"; // React Grid Logic
+import "ag-grid-community/styles/ag-grid.css"; // Core CSS
+import "ag-grid-community/styles/ag-theme-quartz.css"; // Theme
+import { CircularProgress, Flex, Text } from "@chakra-ui/react";
 
-type ColDefType = {
-  field: string;
+const OnLoadingComponent = () => {
+  return (
+    <Flex gap={5}>
+      <CircularProgress isIndeterminate color="green.300" size="24px" />
+      <Text>Loading...</Text>
+    </Flex>
+  );
 };
+
+const gridOptions = {
+  pagination: true,
+  defaultColDef: { filter: true },
+  paginationPageSize: 20,
+  paginationPageSizeSelector: [10, 20, 30, 40, 50],
+  loadingOverlayComponent: OnLoadingComponent,
+  overlayNoRowsTemplate:
+    '<span class="ag-overlay-no-rows-center">No data available</span>',
+};
+
 interface IGridContainer {
-  rowData: Array<any>;
-  colDefs: Array<ColDefType>;
+  colDefs: Array<any>;
+  onGridReady: (params: any) => void;
 }
-const GridContainer: FC<IGridContainer> = ({ rowData, colDefs }) => {
+const GridContainer: FC<IGridContainer> = ({ colDefs, onGridReady }) => {
   return (
     <div
       className="ag-theme-alpine"
@@ -19,11 +38,9 @@ const GridContainer: FC<IGridContainer> = ({ rowData, colDefs }) => {
       }}
     >
       <AgGridReact
-        rowData={rowData}
         columnDefs={colDefs}
-        paginationPageSize={10}
-        paginationPageSizeSelector={[10, 20, 50]}
-        pagination={true}
+        onGridReady={onGridReady}
+        gridOptions={gridOptions}
       />
     </div>
   );
