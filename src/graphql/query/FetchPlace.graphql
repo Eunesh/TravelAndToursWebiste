@@ -1,0 +1,12 @@
+query FetchPlace($id: ID!) {
+  place(id: $id) {
+    id
+    name
+    description
+    pictureUrls
+    events {
+      id
+      name
+    }
+  }
+}

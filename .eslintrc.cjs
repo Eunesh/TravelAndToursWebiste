@@ -7,6 +7,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
+  eslintIgnore: ['src/generated/graphql.tsx'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   rules: {
