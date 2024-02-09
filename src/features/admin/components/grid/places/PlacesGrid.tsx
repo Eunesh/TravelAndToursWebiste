@@ -1,8 +1,9 @@
 import { Flex, Input } from "@chakra-ui/react";
-import { FC, ReactNode, useEffect, useMemo, useState } from "react";
+import { FC, ReactNode, useCallback, useMemo, useState } from "react";
 import { GridApi, GridReadyEvent } from "ag-grid-community";
 import GridContainer from "../GridContainer";
 import { useFetchPlacesDataLazyQuery } from "../../../../../generated/graphql";
+import { toast } from "react-toastify";
 
 // Column Definitions: Defines & controls grid columns.
 const colDefs = [
@@ -21,33 +22,27 @@ const PlacesGrid: FC<IPlaceGrid> = ({ topPlaceholder }) => {
   const [quickFilterText, setQuickFilterText] = useState("");
   const columnDefs = useMemo(() => colDefs, []);
 
-  const [fetchPlaces, { loading, data, error }] = useFetchPlacesDataLazyQuery();
+  const [fetchData] = useFetchPlacesDataLazyQuery();
 
   const onGridReady = (event: GridReadyEvent) => {
     const { api } = event;
-    fetchPlaces({});
     setGridApi(api);
+    loadRowData(api);
   };
 
-  useEffect(() => {
-    if (gridApi) {
-      if (loading) {
-        gridApi.showLoadingOverlay();
-      } else {
-        gridApi.hideOverlay();
-        if (error) {
-          gridApi.showNoRowsOverlay();
-        }
-
-        const collection = data?.places || [];
-
-        gridApi.setRowData(collection);
-      }
-    }
-  }, [loading, error, data]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    fetchPlaces({});
+  const loadRowData = useCallback((api: GridApi) => {
+    api.showLoadingOverlay();
+    fetchData()
+      .then((response) => response.data?.places)
+      .then((places) => {
+        api.hideOverlay();
+        api.setRowData(places || []);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+        api.showNoRowsOverlay();
+        api.setRowData([]);
+      });
   }, []);
 
   // Filtering the Whole Grid

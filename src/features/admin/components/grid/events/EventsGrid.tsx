@@ -1,8 +1,9 @@
-import { FC, ReactNode, useEffect, useMemo, useState } from "react";
+import { FC, ReactNode, useCallback, useMemo, useState } from "react";
 import { GridApi, GridReadyEvent } from "ag-grid-community";
 import GridContainer from "../GridContainer";
 import { useFetchEventsDataLazyQuery } from "../../../../../generated/graphql";
 import { Flex, Input } from "@chakra-ui/react";
+import { toast } from "react-toastify";
 
 // Column Definitions: Defines & controls grid columns.
 const colDefs = [
@@ -22,29 +23,28 @@ const EventsGrid: FC<IEventGrid> = ({ topPlaceholder }) => {
   const [quickFilterText, setQuickFilterText] = useState("");
   const columnDefs = useMemo(() => colDefs, []);
 
-  const [fetchEvents, { loading, data, error }] = useFetchEventsDataLazyQuery();
+  const [fetchData] = useFetchEventsDataLazyQuery();
 
   const onGridReady = (event: GridReadyEvent) => {
     const { api } = event;
-    fetchEvents();
     setGridApi(api);
+    loadRowData(api);
   };
 
-  useEffect(() => {
-    if (gridApi) {
-      if (loading) {
-        gridApi.showLoadingOverlay();
-      } else {
-        gridApi.hideOverlay();
-        if (error) {
-          gridApi.showNoRowsOverlay();
-        }
-        const collection = data?.events || [];
-
-        gridApi.setRowData(collection);
-      }
-    }
-  }, [loading, error, data]); // eslint-disable-line react-hooks/exhaustive-deps
+  const loadRowData = useCallback((api: GridApi) => {
+    api.showLoadingOverlay();
+    fetchData()
+      .then((response) => response.data?.events)
+      .then((events) => {
+        api.hideOverlay();
+        api.setRowData(events || []);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+        api.showNoRowsOverlay();
+        api.setRowData([]);
+      });
+  }, []);
 
   // Filtering the Whole Grid
   const handleFilterChange = (event: any) => {
