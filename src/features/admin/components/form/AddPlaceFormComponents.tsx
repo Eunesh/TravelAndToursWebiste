@@ -5,6 +5,7 @@ import SubmitBtnOrProgressSpinner from "../miscellaneous/SubmitBtnOrProgressSpin
 
 // ICON
 import PlaceIcon from "@mui/icons-material/Place";
+import WysiwygField from "../../../../components/wysiwyg/WysiwygField";
 // ICON
 
 const AddPlaceFormComponents = () => {
@@ -17,7 +18,7 @@ const AddPlaceFormComponents = () => {
           placeholder="Enter the place name..."
           icon={() => <PlaceIcon />}
         />
-        {/* WYSIWYG */}
+        <WysiwygField name="description" label="Add A Description" />
         <SubmitBtnOrProgressSpinner isSubmitting={isSubmitting} />
       </Stack>
     </form>

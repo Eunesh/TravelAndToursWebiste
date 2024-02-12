@@ -20,11 +20,6 @@ const TextInput: FC<ITextInput> = ({
   placeholder,
   icon,
 }) => {
-  const [show, setShow] = useState(false);
-  const toggleShow = () => {
-    setShow(!show);
-  };
-
   const [field, meta] = useField(name);
   return (
     <FormControl isInvalid={Boolean(meta.touched && meta.error)}>
@@ -39,11 +34,7 @@ const TextInput: FC<ITextInput> = ({
           placeholder={placeholder}
         />
         {icon && (
-          <InputLeftElement
-            cursor="pointer"
-            onClick={toggleShow}
-            color={"gray.300"}
-          >
+          <InputLeftElement cursor="pointer" color={"gray.300"}>
             {icon()}
           </InputLeftElement>
         )}

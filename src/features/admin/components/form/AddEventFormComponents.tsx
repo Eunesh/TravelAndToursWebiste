@@ -5,6 +5,7 @@ import SubmitBtnOrProgressSpinner from "../miscellaneous/SubmitBtnOrProgressSpin
 
 // ICON
 import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
+import WysiwygField from "../../../../components/wysiwyg/WysiwygField";
 // ICON
 
 const AddEventFormComponents = () => {
@@ -17,7 +18,7 @@ const AddEventFormComponents = () => {
           placeholder="Enter the event name..."
           icon={() => <AirplaneTicketIcon />}
         />
-        {/* WYSIWYG */}
+        <WysiwygField name="description" label="Add A Description" />
         <SubmitBtnOrProgressSpinner isSubmitting={isSubmitting} />
       </Stack>
     </form>
