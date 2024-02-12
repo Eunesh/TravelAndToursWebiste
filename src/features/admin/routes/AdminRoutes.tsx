@@ -15,6 +15,7 @@ const AdminRoutes = () => {
       <Route path="protected" element={<AdminPagesLayout />}>
         <Route path="" element={<AdminHomePage />} />
         <Route path="events" element={<AdminEventsPage />} />
+        <Route path="*" element={<PageNotFound />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

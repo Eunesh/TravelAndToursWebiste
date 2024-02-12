@@ -4,15 +4,24 @@ import GridContainer from "../GridContainer";
 import { useFetchEventsDataLazyQuery } from "../../../../../generated/graphql";
 import { Flex, Input } from "@chakra-ui/react";
 import { toast } from "react-toastify";
+import RenderEventPlace from "../cellRenderer/RenderEventPlace";
+import RenderPictures from "../cellRenderer/RenderPictures";
 
 // Column Definitions: Defines & controls grid columns.
 const colDefs = [
   { headerName: "S.N.", valueGetter: "node.rowIndex + 1", width: 100 },
   { field: "id" },
   { field: "name" },
-  { field: "description", flex: 1 },
-  { field: "pictureUrls" },
-  { field: "place" },
+  { field: "description", flex: 1, minWidth: 200 },
+  {
+    field: "pictureUrls",
+    headerName: "Pictures",
+    cellRenderer: RenderPictures,
+  },
+  {
+    field: "place",
+    cellRenderer: RenderEventPlace,
+  },
 ];
 
 interface IEventGrid {

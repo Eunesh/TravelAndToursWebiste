@@ -4,6 +4,8 @@ import { GridApi, GridReadyEvent } from "ag-grid-community";
 import GridContainer from "../GridContainer";
 import { useFetchPlacesDataLazyQuery } from "../../../../../generated/graphql";
 import { toast } from "react-toastify";
+import RenderEventCount from "../cellRenderer/RenderEventCount";
+import RenderPictures from "../cellRenderer/RenderPictures";
 
 // Column Definitions: Defines & controls grid columns.
 const colDefs = [
@@ -11,8 +13,16 @@ const colDefs = [
   { field: "id" },
   { field: "name" },
   { field: "description", flex: 1, minWidth: 200 },
-  { field: "pictureUrls" },
-  { field: "events" },
+  {
+    field: "pictureUrls",
+    headerName: "Pictures",
+    cellRenderer: RenderPictures,
+  },
+  {
+    field: "events",
+    headerName: "Event Count",
+    cellRenderer: RenderEventCount,
+  },
 ];
 interface IPlaceGrid {
   topPlaceholder: ReactNode;
