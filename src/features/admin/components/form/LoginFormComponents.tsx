@@ -1,7 +1,8 @@
 import { useFormikContext } from "formik";
-import { Button, Center, CircularProgress, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import PasswordInput from "../../../../components/common/form/PasswordInput";
 import TextInput from "../../../../components/common/form/TextInput";
+import SubmitBtnOrProgressSpinner from "../miscellaneous/SubmitBtnOrProgressSpinner";
 
 // ICON
 import EmailIcon from "@mui/icons-material/Email";
@@ -18,13 +19,7 @@ const LoginFormComponents = () => {
           icon={() => <EmailIcon />}
         />
         <PasswordInput name="password" placeholder="Password" />
-        {isSubmitting ? (
-          <Center>
-            <CircularProgress isIndeterminate color="green.300" size="40px" />
-          </Center>
-        ) : (
-          <Button type="submit">Submit</Button>
-        )}
+        <SubmitBtnOrProgressSpinner isSubmitting={isSubmitting} />
       </Stack>
     </form>
   );
