@@ -19,7 +19,7 @@ const ModalContainer: FC<IModalContainer> = ({
   children,
 }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="6xl">
+    <Modal isOpen={isOpen} onClose={onClose} size="full">
       <CustomModalOverlay />
       <ModalContent>
         <ModalHeader>{title}</ModalHeader>

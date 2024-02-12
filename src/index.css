@@ -34,3 +34,9 @@
   z-index: 0 !important;
 }
 /* ----------- DONE ----------- */
+
+/* Giving a fixed height to the WYSIWYG component */
+.ck-content {
+  height: 500px;
+}
+/* ----------- DONE ----------- */
