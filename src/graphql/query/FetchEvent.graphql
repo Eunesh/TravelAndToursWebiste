@@ -1,0 +1,12 @@
+query FetchEvent($id: ID!){
+  event(id: $id){
+    id
+    name
+    description
+    pictureUrls
+    place {
+      id
+      name
+    }
+  }
+}

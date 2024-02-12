@@ -1,7 +1,19 @@
-import { Text } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
+import PageTitle from "../components/layout/PageTitle";
+import PlacesGrid from "../components/grid/places/PlacesGrid";
+import CustomDivider from "../../../components/common/miscellaneous/CustomDivider";
+import AddPlaceComponent from "../components/grid/places/AddPlaceComponent";
 
 const AdminHomePage = () => {
-  return <Text>Hello Boss</Text>;
+  return (
+    <Stack spacing={4}>
+      <PageTitle title="Manage Your Places" />
+      <CustomDivider />
+      <Stack spacing={2}>
+        <PlacesGrid topPlaceholder={<AddPlaceComponent />} />
+      </Stack>
+    </Stack>
+  );
 };
 
 export default AdminHomePage;

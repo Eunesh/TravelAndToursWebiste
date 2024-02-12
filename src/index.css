@@ -28,3 +28,9 @@
   padding: 30px;
   background: linear-gradient(to right, #1d4350, #a43931);
 }
+
+/* This resolves the carousel's navigation icons from appearing in front of components (Header) where it should not be visible. */
+.react-multiple-carousel__arrow {
+  z-index: 0 !important;
+}
+/* ----------- DONE ----------- */

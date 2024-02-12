@@ -1,0 +1,12 @@
+query FetchEventsData {
+  events {
+    id
+    name
+    description
+    pictureUrls
+    place {
+      id
+      name
+    }
+  }
+}

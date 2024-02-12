@@ -1,0 +1,18 @@
+overwrite: true
+schema: "http://localhost:5000/graphql"
+# I will remove the headers once the schema is exposed.
+headers:
+  Cookie: "admin_session=5I9K94fvfeGhNF9st1EV2C9FBu2d9UiBYXuq3e99uL6o1%2FITcQtrBXk0Of1LFEruNmMSHrVirtCmUEgJgGjK43zehVqmj1XS%2FeJONRWQU9ud41Rw8ESMRVNmYHumjD4vscl6oNRXme62xMU4ynEPT%2FYzkQxX8det83md6uaP0mS5B4qgd%2FgqCQnpQ7jP4YFi1W8u5MxZJjiH%2FGExCJHT5PXtw7YbKgAKVY8SUIee6LcnXgExKHREn%2BoC%2FtJqmcFRUzRwjBge5oEhaxqn%2FmrmwHCj4qS8--53Vyl%2Bnb9sIee3Nl--OiQRtceT9FFcSUbhgPPCoQ%3D%3D"
+documents: "src/!(generated)/**/*.graphql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      # withHooks: true
+      # withMutationHook: true
+      # withQueryHook: true
+    hooks:
+      afterOneFileWrite: ["eslint --ext .tsx --fix"]
