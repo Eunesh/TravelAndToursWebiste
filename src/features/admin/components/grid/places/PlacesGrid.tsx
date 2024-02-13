@@ -1,11 +1,17 @@
 import { Flex, Input } from "@chakra-ui/react";
-import { FC, ReactNode, useCallback, useMemo, useState } from "react";
+import { FC, ReactNode, useCallback, useMemo } from "react";
 import { GridApi, GridReadyEvent } from "ag-grid-community";
 import GridContainer from "../GridContainer";
 import { useFetchPlacesDataLazyQuery } from "../../../../../generated/graphql";
 import { toast } from "react-toastify";
 import RenderEventCount from "../cellRenderer/RenderEventCount";
 import RenderPictures from "../cellRenderer/RenderPictures";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectPlaceGridSearchTerm,
+  setPlaceGridApi,
+  setPlaceGridSearchTerm,
+} from "../../../../places/slice/placeSlice";
 
 // Column Definitions: Defines & controls grid columns.
 const colDefs = [
@@ -28,15 +34,16 @@ interface IPlaceGrid {
   topPlaceholder: ReactNode;
 }
 const PlacesGrid: FC<IPlaceGrid> = ({ topPlaceholder }) => {
-  const [gridApi, setGridApi] = useState<GridApi>();
-  const [quickFilterText, setQuickFilterText] = useState("");
+  const searchTerm = useSelector(selectPlaceGridSearchTerm);
+  const dispatch = useDispatch();
+
   const columnDefs = useMemo(() => colDefs, []);
 
   const [fetchData] = useFetchPlacesDataLazyQuery();
 
   const onGridReady = (event: GridReadyEvent) => {
     const { api } = event;
-    setGridApi(api);
+    dispatch(setPlaceGridApi(api));
     loadRowData(api);
   };
 
@@ -58,10 +65,7 @@ const PlacesGrid: FC<IPlaceGrid> = ({ topPlaceholder }) => {
   // Filtering the Whole Grid
   const handleFilterChange = (event: any) => {
     const filterText = event.target.value;
-    setQuickFilterText(filterText);
-    if (gridApi) {
-      gridApi.setQuickFilter(filterText);
-    }
+    dispatch(setPlaceGridSearchTerm(filterText));
   };
   // Filtering the whole grid
 
@@ -71,7 +75,7 @@ const PlacesGrid: FC<IPlaceGrid> = ({ topPlaceholder }) => {
         <Input
           type="text"
           placeholder="Quickly Filter the grid"
-          value={quickFilterText}
+          value={searchTerm}
           onChange={handleFilterChange}
         />
         {topPlaceholder}

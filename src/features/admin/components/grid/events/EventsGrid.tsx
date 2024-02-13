@@ -6,6 +6,12 @@ import { Flex, Input } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 import RenderEventPlace from "../cellRenderer/RenderEventPlace";
 import RenderPictures from "../cellRenderer/RenderPictures";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectEventGridSearchTerm,
+  setEventGridApi,
+  setEventGridSearchTerm,
+} from "../../../../events/slice/eventSlice";
 
 // Column Definitions: Defines & controls grid columns.
 const colDefs = [
@@ -28,15 +34,15 @@ interface IEventGrid {
   topPlaceholder: ReactNode;
 }
 const EventsGrid: FC<IEventGrid> = ({ topPlaceholder }) => {
-  const [gridApi, setGridApi] = useState<GridApi>();
-  const [quickFilterText, setQuickFilterText] = useState("");
+  const searchTerm = useSelector(selectEventGridSearchTerm);
+  const dispatch = useDispatch();
   const columnDefs = useMemo(() => colDefs, []);
 
   const [fetchData] = useFetchEventsDataLazyQuery();
 
   const onGridReady = (event: GridReadyEvent) => {
     const { api } = event;
-    setGridApi(api);
+    dispatch(setEventGridApi(api));
     loadRowData(api);
   };
 
@@ -58,10 +64,7 @@ const EventsGrid: FC<IEventGrid> = ({ topPlaceholder }) => {
   // Filtering the Whole Grid
   const handleFilterChange = (event: any) => {
     const filterText = event.target.value;
-    setQuickFilterText(filterText);
-    if (gridApi) {
-      gridApi.setQuickFilter(filterText);
-    }
+    dispatch(setEventGridSearchTerm(filterText));
   };
   // Filtering the whole grid
 
@@ -71,7 +74,7 @@ const EventsGrid: FC<IEventGrid> = ({ topPlaceholder }) => {
         <Input
           type="text"
           placeholder="Quickly Filter the grid"
-          value={quickFilterText}
+          value={searchTerm}
           onChange={handleFilterChange}
         />
         {topPlaceholder}

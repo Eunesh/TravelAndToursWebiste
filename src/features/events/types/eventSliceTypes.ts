@@ -4,6 +4,7 @@ import { EventType } from "./eventTypes";
 export type EventSliceType = {
   gridApi: GridApi<any> | null;
   selectedEvent: Event | null;
+  searchTerm: "";
 };
 
 export type SetEventGridApiAT = {
@@ -15,3 +16,8 @@ export type SetSelectedEventAT = {
   type: any;
   payload: EventType;
 };
+
+export type SetEventGridSearchTermAT = {
+  type: any,
+  payload: string
+}
