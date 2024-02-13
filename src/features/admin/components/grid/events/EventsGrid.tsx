@@ -1,4 +1,4 @@
-import { FC, ReactNode, useCallback, useMemo, useState } from "react";
+import { FC, ReactNode, useCallback, useMemo } from "react";
 import { GridApi, GridReadyEvent } from "ag-grid-community";
 import GridContainer from "../GridContainer";
 import { useFetchEventsDataLazyQuery } from "../../../../../generated/graphql";
@@ -52,12 +52,12 @@ const EventsGrid: FC<IEventGrid> = ({ topPlaceholder }) => {
       .then((response) => response.data?.events)
       .then((events) => {
         api.hideOverlay();
-        api.setRowData(events || []);
+        api.setGridOption("rowData", events || []);
       })
       .catch((error) => {
         toast.error(error.message);
         api.showNoRowsOverlay();
-        api.setRowData([]);
+        api.setGridOption("rowData", []);
       });
   }, []);
 

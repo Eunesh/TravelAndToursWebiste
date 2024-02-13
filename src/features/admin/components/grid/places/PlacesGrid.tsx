@@ -53,12 +53,12 @@ const PlacesGrid: FC<IPlaceGrid> = ({ topPlaceholder }) => {
       .then((response) => response.data?.places)
       .then((places) => {
         api.hideOverlay();
-        api.setRowData(places || []);
+        api.setGridOption("rowData", places || []);
       })
       .catch((error) => {
         toast.error(error.message);
         api.showNoRowsOverlay();
-        api.setRowData([]);
+        api.setGridOption("rowData", []);
       });
   }, []);
 

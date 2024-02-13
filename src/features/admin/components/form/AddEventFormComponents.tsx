@@ -18,6 +18,7 @@ const AddEventFormComponents = () => {
           placeholder="Enter the event name..."
           icon={() => <AirplaneTicketIcon />}
         />
+        
         <WysiwygField name="description" label="Add A Description" />
         <SubmitBtnOrProgressSpinner isSubmitting={isSubmitting} />
       </Stack>

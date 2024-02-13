@@ -21,3 +21,8 @@ export type SetPlaceGridSearchTermAT = {
   type: any;
   payload: string;
 };
+
+export type AddPlaceAT = {
+  type: any;
+  payload: PlaceType;
+};

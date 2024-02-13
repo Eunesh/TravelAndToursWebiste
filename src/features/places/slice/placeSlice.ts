@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  AddPlaceAT,
   PlaceSliceType,
   SetPlaceGridApiAT,
   SetPlaceGridSearchTermAT,
@@ -18,6 +19,12 @@ const placeSlice = createSlice({
   reducers: {
     setPlaceGridApi: (state: any, action: SetPlaceGridApiAT) => {
       state.gridApi = action.payload;
+      return state;
+    },
+    addPlace: (state: any, action: AddPlaceAT) => {
+      if (state.gridApi) {
+        state.gridApi.applyTransaction({ add: [action.payload] });
+      }
       return state;
     },
     setPlaceGridSearchTerm: (state: any, action: SetPlaceGridSearchTermAT) => {
@@ -48,6 +55,10 @@ export const selectPlaceGridSearchTerm = (state: any) => {
 };
 // Selectors
 
-export const { setPlaceGridApi, setPlaceGridSearchTerm, setSelectedPlace } =
-  placeSlice.actions;
+export const {
+  setPlaceGridApi,
+  setPlaceGridSearchTerm,
+  setSelectedPlace,
+  addPlace,
+} = placeSlice.actions;
 export default placeSlice.reducer;

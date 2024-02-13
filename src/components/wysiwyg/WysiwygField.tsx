@@ -7,6 +7,7 @@ import WysiwygContainer from "./WysiwygContainer";
 
 const CustomStack = styled(Stack)(({ isInvalid }: { isInvalid: boolean }) => ({
   border: isInvalid ? "2px solid #E53E3E" : "none",
+  color: isInvalid ? "#E53E3E" : "inherit",
 }));
 
 interface IWysiwygField {
