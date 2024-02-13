@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  AddEventAT,
   EventSliceType,
   SetEventGridApiAT,
   SetEventGridSearchTermAT,
@@ -18,6 +19,12 @@ const eventSlice = createSlice({
   reducers: {
     setEventGridApi: (state: any, action: SetEventGridApiAT) => {
       state.gridApi = action.payload;
+      return state;
+    },
+    addEvent: (state: any, action: AddEventAT) => {
+      if (state.gridApi) {
+        state.gridApi.applyTransaction({ add: [action.payload] });
+      }
       return state;
     },
     setEventGridSearchTerm: (state: any, action: SetEventGridSearchTermAT) => {
@@ -48,6 +55,10 @@ export const selectEventGridSearchTerm = (state: any) => {
 };
 // Selectors
 
-export const { setEventGridApi, setEventGridSearchTerm, setSelectedEvent } =
-  eventSlice.actions;
+export const {
+  setEventGridApi,
+  setEventGridSearchTerm,
+  setSelectedEvent,
+  addEvent,
+} = eventSlice.actions;
 export default eventSlice.reducer;

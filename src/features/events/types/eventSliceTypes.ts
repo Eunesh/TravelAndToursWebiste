@@ -18,6 +18,11 @@ export type SetSelectedEventAT = {
 };
 
 export type SetEventGridSearchTermAT = {
-  type: any,
-  payload: string
-}
+  type: any;
+  payload: string;
+};
+
+export type AddEventAT = {
+  type: any;
+  payload: EventType;
+};

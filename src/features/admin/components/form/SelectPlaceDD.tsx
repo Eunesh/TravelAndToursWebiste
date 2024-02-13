@@ -10,7 +10,7 @@ const SelectPlaceDD = () => {
   return (
     <CustomSelect
       name="placeId"
-      placeholder="Select an event place"
+      placeholder="Select a place for the event"
       options={placesDD}
     />
   );
