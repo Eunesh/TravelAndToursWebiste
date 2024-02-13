@@ -191,6 +191,11 @@ export type FetchPlaceQueryVariables = Exact<{
 
 export type FetchPlaceQuery = { __typename?: 'Query', place: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } };
 
+export type FetchPlacesDdQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FetchPlacesDdQuery = { __typename?: 'Query', places: Array<{ __typename?: 'Place', id: string, name?: string | null }> };
+
 export type FetchPlacesDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -567,6 +572,46 @@ export type FetchPlaceQueryHookResult = ReturnType<typeof useFetchPlaceQuery>;
 export type FetchPlaceLazyQueryHookResult = ReturnType<typeof useFetchPlaceLazyQuery>;
 export type FetchPlaceSuspenseQueryHookResult = ReturnType<typeof useFetchPlaceSuspenseQuery>;
 export type FetchPlaceQueryResult = Apollo.QueryResult<FetchPlaceQuery, FetchPlaceQueryVariables>;
+export const FetchPlacesDdDocument = gql`
+    query FetchPlacesDD {
+  places {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useFetchPlacesDdQuery__
+ *
+ * To run a query within a React component, call `useFetchPlacesDdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchPlacesDdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchPlacesDdQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFetchPlacesDdQuery(baseOptions?: Apollo.QueryHookOptions<FetchPlacesDdQuery, FetchPlacesDdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FetchPlacesDdQuery, FetchPlacesDdQueryVariables>(FetchPlacesDdDocument, options);
+      }
+export function useFetchPlacesDdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FetchPlacesDdQuery, FetchPlacesDdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FetchPlacesDdQuery, FetchPlacesDdQueryVariables>(FetchPlacesDdDocument, options);
+        }
+export function useFetchPlacesDdSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<FetchPlacesDdQuery, FetchPlacesDdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<FetchPlacesDdQuery, FetchPlacesDdQueryVariables>(FetchPlacesDdDocument, options);
+        }
+export type FetchPlacesDdQueryHookResult = ReturnType<typeof useFetchPlacesDdQuery>;
+export type FetchPlacesDdLazyQueryHookResult = ReturnType<typeof useFetchPlacesDdLazyQuery>;
+export type FetchPlacesDdSuspenseQueryHookResult = ReturnType<typeof useFetchPlacesDdSuspenseQuery>;
+export type FetchPlacesDdQueryResult = Apollo.QueryResult<FetchPlacesDdQuery, FetchPlacesDdQueryVariables>;
 export const FetchPlacesDataDocument = gql`
     query FetchPlacesData {
   places {

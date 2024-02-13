@@ -1,3 +1,4 @@
+import { DDType } from "../../../types/commonTypes";
 import { EventAndPlaceInListType } from "../../events/types/eventTypes";
 
 export type AddPlaceType = {
@@ -10,3 +11,5 @@ export type PlaceType = {
   description: string;
   events: Array<EventAndPlaceInListType>;
 };
+
+export type PlaceDDType = DDType;

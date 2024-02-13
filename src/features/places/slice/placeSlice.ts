@@ -4,6 +4,7 @@ import {
   PlaceSliceType,
   SetPlaceGridApiAT,
   SetPlaceGridSearchTermAT,
+  SetPlacesDDAT,
   SetSelectedPlaceAT,
 } from "../types/placeSliceTypes";
 
@@ -11,6 +12,7 @@ const initialState: PlaceSliceType = {
   gridApi: null,
   selectedPlace: null,
   searchTerm: "",
+  placesDD: [],
 };
 
 const placeSlice = createSlice({
@@ -20,6 +22,9 @@ const placeSlice = createSlice({
     setPlaceGridApi: (state: any, action: SetPlaceGridApiAT) => {
       state.gridApi = action.payload;
       return state;
+    },
+    setPlacesDD: (state: any, action: SetPlacesDDAT) => {
+      state.placesDD = action.payload;
     },
     addPlace: (state: any, action: AddPlaceAT) => {
       if (state.gridApi) {
@@ -46,6 +51,10 @@ export const selectPlaceGridApi = (state: any) => {
   return state.place.gridApi;
 };
 
+export const selectPlacesDD = (state: any) => {
+  return state.place.placesDD;
+};
+
 export const selectSelectedPlace = (state: any) => {
   return state.place.selectedPlace;
 };
@@ -60,5 +69,6 @@ export const {
   setPlaceGridSearchTerm,
   setSelectedPlace,
   addPlace,
+  setPlacesDD,
 } = placeSlice.actions;
 export default placeSlice.reducer;

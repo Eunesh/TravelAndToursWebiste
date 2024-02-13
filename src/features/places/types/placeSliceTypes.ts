@@ -1,10 +1,11 @@
 import { GridApi } from "ag-grid-community";
-import { PlaceType } from "./placeTypes";
+import { PlaceDDType, PlaceType } from "./placeTypes";
 
 export type PlaceSliceType = {
   gridApi: GridApi<any> | null;
   selectedPlace: PlaceType | null;
   searchTerm: string;
+  placesDD: Array<PlaceDDType>;
 };
 
 export type SetPlaceGridApiAT = {
@@ -25,4 +26,9 @@ export type SetPlaceGridSearchTermAT = {
 export type AddPlaceAT = {
   type: any;
   payload: PlaceType;
+};
+
+export type SetPlacesDDAT = {
+  type: any;
+  payload: Array<PlaceDDType>;
 };
