@@ -13,6 +13,7 @@ import {
   setEventGridSearchTerm,
 } from "../../../../events/slice/eventSlice";
 import RenderDescription from "../cellRenderer/RenderDescription";
+import RenderEventActions from "../cellRenderer/RenderEventActions";
 
 // Column Definitions: Defines & controls grid columns.
 const colDefs = [
@@ -33,6 +34,11 @@ const colDefs = [
   {
     field: "place",
     cellRenderer: RenderEventPlace,
+  },
+  {
+    field: "id",
+    headerName: "Actions",
+    cellRenderer: RenderEventActions,
   },
 ];
 

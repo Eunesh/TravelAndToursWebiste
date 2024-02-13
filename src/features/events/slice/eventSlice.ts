@@ -27,6 +27,18 @@ const eventSlice = createSlice({
       }
       return state;
     },
+    deleteEventFromGrid: (state: any) => {
+      if (state.gridApi) {
+        const selectedData = state.gridApi.getSelectedRows();
+        state.gridApi.applyTransaction({ remove: selectedData })!;
+      }
+      return state;
+    },
+    selectEventToEdit: (state: any) => {
+      if (state.gridApi) {
+      }
+      return state;
+    },
     setEventGridSearchTerm: (state: any, action: SetEventGridSearchTermAT) => {
       state.searchTerm = action.payload;
       if (state.gridApi) {
@@ -60,5 +72,7 @@ export const {
   setEventGridSearchTerm,
   setSelectedEvent,
   addEvent,
+  deleteEventFromGrid,
+  selectEventToEdit,
 } = eventSlice.actions;
 export default eventSlice.reducer;

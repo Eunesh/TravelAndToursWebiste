@@ -39,6 +39,7 @@ const GridContainer: FC<IGridContainer> = ({ colDefs, onGridReady }) => {
     >
       <AgGridReact
         columnDefs={colDefs}
+        rowSelection="single" 
         onGridReady={onGridReady}
         gridOptions={gridOptions}
       />

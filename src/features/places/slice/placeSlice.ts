@@ -26,6 +26,19 @@ const placeSlice = createSlice({
     setPlacesDD: (state: any, action: SetPlacesDDAT) => {
       state.placesDD = action.payload;
     },
+    selectPlaceToEdit: (state: any) => {
+      if (state.gridApi) {
+      }
+      return state;
+    },
+    deletePlaceFromGrid: (state: any) => {
+      if (state.gridApi) {
+        const selectedData = state.gridApi.getSelectedRows();
+        console.log(selectedData)
+        state.gridApi.applyTransaction({ remove: selectedData });
+      }
+      return state;
+    },
     addPlace: (state: any, action: AddPlaceAT) => {
       if (state.gridApi) {
         state.gridApi.applyTransaction({ add: [action.payload] });
@@ -70,5 +83,7 @@ export const {
   setSelectedPlace,
   addPlace,
   setPlacesDD,
+  selectPlaceToEdit,
+  deletePlaceFromGrid,
 } = placeSlice.actions;
 export default placeSlice.reducer;

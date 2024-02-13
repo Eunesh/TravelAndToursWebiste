@@ -13,6 +13,7 @@ import {
   setPlaceGridSearchTerm,
 } from "../../../../places/slice/placeSlice";
 import RenderDescription from "../cellRenderer/RenderDescription";
+import RenderPlaceActions from "../cellRenderer/RenderPlaceActions";
 
 // Column Definitions: Defines & controls grid columns.
 const colDefs = [
@@ -34,6 +35,11 @@ const colDefs = [
     field: "events",
     headerName: "Event Count",
     cellRenderer: RenderEventCount,
+  },
+  {
+    field: "id",
+    headerName: "Actions",
+    cellRenderer: RenderPlaceActions
   },
 ];
 interface IPlaceGrid {
