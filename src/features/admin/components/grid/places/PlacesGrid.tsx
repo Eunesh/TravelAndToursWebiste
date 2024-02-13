@@ -12,13 +12,19 @@ import {
   setPlaceGridApi,
   setPlaceGridSearchTerm,
 } from "../../../../places/slice/placeSlice";
+import RenderDescription from "../cellRenderer/RenderDescription";
 
 // Column Definitions: Defines & controls grid columns.
 const colDefs = [
   { headerName: "S.N.", valueGetter: "node.rowIndex + 1", width: 100 },
   { field: "id" },
   { field: "name" },
-  { field: "description", flex: 1, minWidth: 200 },
+  {
+    field: "description",
+    flex: 1,
+    minWidth: 200,
+    cellRenderer: RenderDescription,
+  },
   {
     field: "pictureUrls",
     headerName: "Pictures",
