@@ -8,6 +8,9 @@ export const clearSession = () => {
   sessionStorage.removeItem("admin");
 };
 
+export const getAdminSessionToken = () => {
+  return cookie.get("admin_session");
+};
 export const setSessionAdmin = (admin: SessionAdminType) => {
   sessionStorage.setItem("admin", JSON.stringify(admin));
 };

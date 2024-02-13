@@ -122,6 +122,56 @@ export type QueryPlacesArgs = {
   take?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type CreateEventMutationVariables = Exact<{
+  name: Scalars['String']['input'];
+  description: Scalars['String']['input'];
+  placeId: Scalars['ID']['input'];
+}>;
+
+
+export type CreateEventMutation = { __typename?: 'Mutation', createEvent?: { __typename?: 'Event', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null } | null } | null };
+
+export type CreatePlaceMutationVariables = Exact<{
+  name: Scalars['String']['input'];
+  description: Scalars['String']['input'];
+}>;
+
+
+export type CreatePlaceMutation = { __typename?: 'Mutation', createPlace?: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } | null };
+
+export type DeleteEventMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteEventMutation = { __typename?: 'Mutation', deleteEvent?: string | null };
+
+export type DeletePlaceMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type DeletePlaceMutation = { __typename?: 'Mutation', deletePlace?: string | null };
+
+export type UpdateEventMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  placeId?: InputMaybe<Scalars['ID']['input']>;
+}>;
+
+
+export type UpdateEventMutation = { __typename?: 'Mutation', updateEvent?: { __typename?: 'Event', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null } | null } | null };
+
+export type UpdatePlaceMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type UpdatePlaceMutation = { __typename?: 'Mutation', updatePlace?: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } | null };
+
 export type FetchEventQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
@@ -147,6 +197,236 @@ export type FetchPlacesDataQueryVariables = Exact<{ [key: string]: never; }>;
 export type FetchPlacesDataQuery = { __typename?: 'Query', places: Array<{ __typename?: 'Place', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null }> };
 
 
+export const CreateEventDocument = gql`
+    mutation CreateEvent($name: String!, $description: String!, $placeId: ID!) {
+  createEvent(name: $name, description: $description, placeId: $placeId) {
+    id
+    name
+    description
+    pictureUrls
+    place {
+      id
+      name
+    }
+  }
+}
+    `;
+export type CreateEventMutationFn = Apollo.MutationFunction<CreateEventMutation, CreateEventMutationVariables>;
+
+/**
+ * __useCreateEventMutation__
+ *
+ * To run a mutation, you first call `useCreateEventMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateEventMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createEventMutation, { data, loading, error }] = useCreateEventMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      description: // value for 'description'
+ *      placeId: // value for 'placeId'
+ *   },
+ * });
+ */
+export function useCreateEventMutation(baseOptions?: Apollo.MutationHookOptions<CreateEventMutation, CreateEventMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateEventMutation, CreateEventMutationVariables>(CreateEventDocument, options);
+      }
+export type CreateEventMutationHookResult = ReturnType<typeof useCreateEventMutation>;
+export type CreateEventMutationResult = Apollo.MutationResult<CreateEventMutation>;
+export type CreateEventMutationOptions = Apollo.BaseMutationOptions<CreateEventMutation, CreateEventMutationVariables>;
+export const CreatePlaceDocument = gql`
+    mutation CreatePlace($name: String!, $description: String!) {
+  createPlace(name: $name, description: $description) {
+    id
+    name
+    description
+    pictureUrls
+    events {
+      id
+      name
+    }
+  }
+}
+    `;
+export type CreatePlaceMutationFn = Apollo.MutationFunction<CreatePlaceMutation, CreatePlaceMutationVariables>;
+
+/**
+ * __useCreatePlaceMutation__
+ *
+ * To run a mutation, you first call `useCreatePlaceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePlaceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPlaceMutation, { data, loading, error }] = useCreatePlaceMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      description: // value for 'description'
+ *   },
+ * });
+ */
+export function useCreatePlaceMutation(baseOptions?: Apollo.MutationHookOptions<CreatePlaceMutation, CreatePlaceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePlaceMutation, CreatePlaceMutationVariables>(CreatePlaceDocument, options);
+      }
+export type CreatePlaceMutationHookResult = ReturnType<typeof useCreatePlaceMutation>;
+export type CreatePlaceMutationResult = Apollo.MutationResult<CreatePlaceMutation>;
+export type CreatePlaceMutationOptions = Apollo.BaseMutationOptions<CreatePlaceMutation, CreatePlaceMutationVariables>;
+export const DeleteEventDocument = gql`
+    mutation DeleteEvent($id: ID!) {
+  deleteEvent(id: $id)
+}
+    `;
+export type DeleteEventMutationFn = Apollo.MutationFunction<DeleteEventMutation, DeleteEventMutationVariables>;
+
+/**
+ * __useDeleteEventMutation__
+ *
+ * To run a mutation, you first call `useDeleteEventMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteEventMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteEventMutation, { data, loading, error }] = useDeleteEventMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteEventMutation(baseOptions?: Apollo.MutationHookOptions<DeleteEventMutation, DeleteEventMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteEventMutation, DeleteEventMutationVariables>(DeleteEventDocument, options);
+      }
+export type DeleteEventMutationHookResult = ReturnType<typeof useDeleteEventMutation>;
+export type DeleteEventMutationResult = Apollo.MutationResult<DeleteEventMutation>;
+export type DeleteEventMutationOptions = Apollo.BaseMutationOptions<DeleteEventMutation, DeleteEventMutationVariables>;
+export const DeletePlaceDocument = gql`
+    mutation DeletePlace($id: ID!) {
+  deletePlace(id: $id)
+}
+    `;
+export type DeletePlaceMutationFn = Apollo.MutationFunction<DeletePlaceMutation, DeletePlaceMutationVariables>;
+
+/**
+ * __useDeletePlaceMutation__
+ *
+ * To run a mutation, you first call `useDeletePlaceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeletePlaceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deletePlaceMutation, { data, loading, error }] = useDeletePlaceMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeletePlaceMutation(baseOptions?: Apollo.MutationHookOptions<DeletePlaceMutation, DeletePlaceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeletePlaceMutation, DeletePlaceMutationVariables>(DeletePlaceDocument, options);
+      }
+export type DeletePlaceMutationHookResult = ReturnType<typeof useDeletePlaceMutation>;
+export type DeletePlaceMutationResult = Apollo.MutationResult<DeletePlaceMutation>;
+export type DeletePlaceMutationOptions = Apollo.BaseMutationOptions<DeletePlaceMutation, DeletePlaceMutationVariables>;
+export const UpdateEventDocument = gql`
+    mutation UpdateEvent($id: ID!, $name: String, $description: String, $placeId: ID) {
+  updateEvent(id: $id, name: $name, description: $description, placeId: $placeId) {
+    id
+    name
+    description
+    pictureUrls
+    place {
+      id
+      name
+    }
+  }
+}
+    `;
+export type UpdateEventMutationFn = Apollo.MutationFunction<UpdateEventMutation, UpdateEventMutationVariables>;
+
+/**
+ * __useUpdateEventMutation__
+ *
+ * To run a mutation, you first call `useUpdateEventMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateEventMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateEventMutation, { data, loading, error }] = useUpdateEventMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      name: // value for 'name'
+ *      description: // value for 'description'
+ *      placeId: // value for 'placeId'
+ *   },
+ * });
+ */
+export function useUpdateEventMutation(baseOptions?: Apollo.MutationHookOptions<UpdateEventMutation, UpdateEventMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateEventMutation, UpdateEventMutationVariables>(UpdateEventDocument, options);
+      }
+export type UpdateEventMutationHookResult = ReturnType<typeof useUpdateEventMutation>;
+export type UpdateEventMutationResult = Apollo.MutationResult<UpdateEventMutation>;
+export type UpdateEventMutationOptions = Apollo.BaseMutationOptions<UpdateEventMutation, UpdateEventMutationVariables>;
+export const UpdatePlaceDocument = gql`
+    mutation UpdatePlace($id: ID!, $name: String, $description: String) {
+  updatePlace(id: $id, name: $name, description: $description) {
+    id
+    name
+    description
+    pictureUrls
+    events {
+      id
+      name
+    }
+  }
+}
+    `;
+export type UpdatePlaceMutationFn = Apollo.MutationFunction<UpdatePlaceMutation, UpdatePlaceMutationVariables>;
+
+/**
+ * __useUpdatePlaceMutation__
+ *
+ * To run a mutation, you first call `useUpdatePlaceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePlaceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePlaceMutation, { data, loading, error }] = useUpdatePlaceMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      name: // value for 'name'
+ *      description: // value for 'description'
+ *   },
+ * });
+ */
+export function useUpdatePlaceMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePlaceMutation, UpdatePlaceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdatePlaceMutation, UpdatePlaceMutationVariables>(UpdatePlaceDocument, options);
+      }
+export type UpdatePlaceMutationHookResult = ReturnType<typeof useUpdatePlaceMutation>;
+export type UpdatePlaceMutationResult = Apollo.MutationResult<UpdatePlaceMutation>;
+export type UpdatePlaceMutationOptions = Apollo.BaseMutationOptions<UpdatePlaceMutation, UpdatePlaceMutationVariables>;
 export const FetchEventDocument = gql`
     query FetchEvent($id: ID!) {
   event(id: $id) {

@@ -36,7 +36,10 @@
 /* ----------- DONE ----------- */
 
 /* Giving a fixed height to the WYSIWYG component */
+.ck {
+  width: 700px;
+}
 .ck-content {
-  height: 500px;
+  height: 800px;
 }
 /* ----------- DONE ----------- */

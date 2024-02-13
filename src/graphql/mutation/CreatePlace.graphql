@@ -1,0 +1,15 @@
+mutation CreatePlace($name: String!, $description: String!) {
+  createPlace(
+    name: $name
+    description: $description
+  ) {
+    id
+    name
+    description
+    pictureUrls
+    events {
+      id
+      name
+    }
+  }
+}
