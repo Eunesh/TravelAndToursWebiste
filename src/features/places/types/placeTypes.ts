@@ -5,6 +5,12 @@ export type AddPlaceType = {
   name: string;
   description: string;
 };
+
+export type EditPlaceType = {
+  id: string;
+  name: string;
+  description: string;
+};
 export type PlaceType = {
   id: number;
   name: string;

@@ -11,6 +11,7 @@ import {
   selectEventGridSearchTerm,
   setEventGridApi,
   setEventGridSearchTerm,
+  setSelectedEventIndex,
 } from "../../../../events/slice/eventSlice";
 import RenderDescription from "../cellRenderer/RenderDescription";
 import RenderEventActions from "../cellRenderer/RenderEventActions";
@@ -80,6 +81,10 @@ const EventsGrid: FC<IEventGrid> = ({ topPlaceholder }) => {
   };
   // Filtering the whole grid
 
+  const handleRowClicked = (event: any) => {
+    dispatch(setSelectedEventIndex(event.rowIndex));
+  };
+
   return (
     <>
       <Flex gap={5} justifyContent="space-between">
@@ -91,7 +96,11 @@ const EventsGrid: FC<IEventGrid> = ({ topPlaceholder }) => {
         />
         {topPlaceholder}
       </Flex>
-      <GridContainer colDefs={columnDefs} onGridReady={onGridReady} />
+      <GridContainer
+        colDefs={columnDefs}
+        onGridReady={onGridReady}
+        handleRowClicked={handleRowClicked}
+      />
     </>
   );
 };

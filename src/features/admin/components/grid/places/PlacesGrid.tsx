@@ -11,6 +11,7 @@ import {
   selectPlaceGridSearchTerm,
   setPlaceGridApi,
   setPlaceGridSearchTerm,
+  setSelectedPlaceIndex,
 } from "../../../../places/slice/placeSlice";
 import RenderDescription from "../cellRenderer/RenderDescription";
 import RenderPlaceActions from "../cellRenderer/RenderPlaceActions";
@@ -39,7 +40,7 @@ const colDefs = [
   {
     field: "id",
     headerName: "Actions",
-    cellRenderer: RenderPlaceActions
+    cellRenderer: RenderPlaceActions,
   },
 ];
 interface IPlaceGrid {
@@ -81,6 +82,11 @@ const PlacesGrid: FC<IPlaceGrid> = ({ topPlaceholder }) => {
   };
   // Filtering the whole grid
 
+  const handleRowClicked = (event: any) => {
+    console.log(event.rowIndex);
+    dispatch(setSelectedPlaceIndex(event.rowIndex));
+  };
+
   return (
     <>
       <Flex gap={5} justifyContent="space-between">
@@ -92,7 +98,7 @@ const PlacesGrid: FC<IPlaceGrid> = ({ topPlaceholder }) => {
         />
         {topPlaceholder}
       </Flex>
-      <GridContainer colDefs={columnDefs} onGridReady={onGridReady} />
+      <GridContainer colDefs={columnDefs} onGridReady={onGridReady} handleRowClicked={handleRowClicked} />
     </>
   );
 };

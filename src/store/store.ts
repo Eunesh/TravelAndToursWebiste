@@ -9,6 +9,13 @@ const store = configureStore({
     event: eventSlice,
     place: placeSlice,
   },
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: {
+      // Ignore these action types
+      ignoredActions: ['place/setPlaceGridApi', 'event/setEventGridApi'],
+    },
+  }),
 });
 
 export default store;

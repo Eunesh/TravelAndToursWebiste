@@ -4,6 +4,13 @@ export type AddEventType = {
   placeId: string;
 };
 
+export type EditEventType = {
+  id: string;
+  name: string;
+  description: string;
+  placeId: string;
+};
+
 export type EventType = {
   id: number;
   name: string;

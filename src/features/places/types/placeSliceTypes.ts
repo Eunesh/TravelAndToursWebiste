@@ -4,6 +4,7 @@ import { PlaceDDType, PlaceType } from "./placeTypes";
 export type PlaceSliceType = {
   gridApi: GridApi<any> | null;
   selectedPlace: PlaceType | null;
+  selectedPlaceIndex: number | null;
   searchTerm: string;
   placesDD: Array<PlaceDDType>;
 };
@@ -13,17 +14,17 @@ export type SetPlaceGridApiAT = {
   payload: GridApi<any>;
 };
 
-export type SetSelectedPlaceAT = {
-  type: any;
-  payload: PlaceType;
-};
-
 export type SetPlaceGridSearchTermAT = {
   type: any;
   payload: string;
 };
 
-export type AddPlaceAT = {
+export type SetSelectedPlaceIndexAT = {
+  type: any;
+  payload: number;
+};
+
+export type AddUpdatePlaceAT = {
   type: any;
   payload: PlaceType;
 };

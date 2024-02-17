@@ -8,11 +8,15 @@ const SelectPlaceDD = () => {
   useRefetchPlacesDD();
 
   return (
-    <CustomSelect
-      name="placeId"
-      placeholder="Select a place for the event"
-      options={placesDD}
-    />
+    <>
+      {placesDD && (
+        <CustomSelect
+          name="placeId"
+          placeholder="Select a place for the event"
+          options={placesDD}
+        />
+      )}
+    </>
   );
 };
 

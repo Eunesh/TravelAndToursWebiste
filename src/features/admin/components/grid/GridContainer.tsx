@@ -27,8 +27,13 @@ const gridOptions = {
 interface IGridContainer {
   colDefs: Array<any>;
   onGridReady: (params: any) => void;
+  handleRowClicked: (event: any) => void;
 }
-const GridContainer: FC<IGridContainer> = ({ colDefs, onGridReady }) => {
+const GridContainer: FC<IGridContainer> = ({
+  colDefs,
+  onGridReady,
+  handleRowClicked,
+}) => {
   return (
     <div
       className="ag-theme-alpine-dark"
@@ -39,9 +44,10 @@ const GridContainer: FC<IGridContainer> = ({ colDefs, onGridReady }) => {
     >
       <AgGridReact
         columnDefs={colDefs}
-        rowSelection="single" 
+        rowSelection="single"
         onGridReady={onGridReady}
         gridOptions={gridOptions}
+        onRowClicked={handleRowClicked}
       />
     </div>
   );

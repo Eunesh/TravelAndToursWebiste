@@ -5,9 +5,9 @@ import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { useField } from "formik";
 import WysiwygContainer from "./WysiwygContainer";
 
-const CustomStack = styled(Stack)(({ isInvalid }: { isInvalid: boolean }) => ({
-  border: isInvalid ? "2px solid #E53E3E" : "none",
-  color: isInvalid ? "#E53E3E" : "inherit",
+const CustomStack = styled(Stack)(({ isinvalid }: { isinvalid: string }) => ({
+  border: isinvalid == "true" ? "2px solid #E53E3E" : "none",
+  color: isinvalid == "true" ? "#E53E3E" : "inherit",
 }));
 
 interface IWysiwygField {
@@ -21,7 +21,10 @@ const WysiwygField: FC<IWysiwygField> = ({ name, label }) => {
   };
   return (
     <Box>
-      <CustomStack isInvalid={Boolean(meta.touched && meta.error)} spacing={2}>
+      <CustomStack
+        isinvalid={Boolean(meta.touched && meta.error).toString()}
+        spacing={2}
+      >
         <Text fontSize="xl">{label}</Text>
         <Flex gap={5}>
           <WysiwygContainer data={field.value} setData={handleSetData} />

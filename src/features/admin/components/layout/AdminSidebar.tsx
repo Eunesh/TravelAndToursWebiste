@@ -46,19 +46,19 @@ const sidebarLink = [
 ];
 
 const SidebarContainer = styled(Stack)(
-  ({ minimized }: { minimized: boolean }) => ({
+  ({ minimized }: { minimized: string }) => ({
     position: "fixed",
     top: 0,
     left: 0,
     color: "white",
     height: "100vh",
-    width: minimized ? "100px" : "400px",
+    width: minimized == "true" ? "100px" : "400px",
     overflow: "auto",
     borderRight: "1px solid #CBD5E0",
     background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)",
     transition: "all 200ms",
     "@media (max-width: 1540px)": {
-      width: minimized ? "100px" : "300px",
+      width: minimized == "true" ? "100px" : "300px",
     },
   })
 );
@@ -159,7 +159,7 @@ const AdminSidebar: FC<IAdminSidebar> = ({
   };
   return (
     <SidebarContainer
-      minimized={minimized}
+      minimized={minimized.toString()}
       spacing={4}
       justifyContent={"space-between"}
     >
@@ -188,7 +188,11 @@ const AdminSidebar: FC<IAdminSidebar> = ({
               onClick={toogleMinimized}
               boxSize={"3rem"}
             >
-              {delayedMinimized ? <KeyboardArrowRightIcon /> : <MenuIcon />}
+              {delayedMinimized ? (
+                <KeyboardArrowRightIcon />
+              ) : (
+                <MenuIcon />
+              )}
             </Button>
           </Flex>
           <Divider sx={{ background: "#CBD5E0" }} />

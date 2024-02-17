@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { useDeletePlaceMutation } from "../../../../../generated/graphql";
 import { toast } from "react-toastify";
 import {
-  deletePlaceFromGrid,
-  selectPlaceToEdit,
+  deletePlaceFromGrid, selectPlaceToEdit,
+  
 } from "../../../../places/slice/placeSlice";
 
 interface IRenderPlaceActions {

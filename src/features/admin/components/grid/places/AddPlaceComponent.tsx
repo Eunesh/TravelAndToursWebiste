@@ -3,6 +3,7 @@ import AddPlaceModal from "../../modals/place/AddPlaceModal";
 
 // ICON
 import AddIcon from "@mui/icons-material/Add";
+import EditPlaceModal from "../../modals/place/EditPlaceModal";
 // ICON
 
 const AddPlaceComponent = () => {
@@ -20,6 +21,7 @@ const AddPlaceComponent = () => {
         Place
       </Button>
       <AddPlaceModal isOpen={isOpen} onClose={onClose} />
+      <EditPlaceModal />
     </>
   );
 };
