@@ -3,6 +3,7 @@ import AddEventModal from "../../modals/event/AddEventModal";
 
 // ICON
 import AddIcon from "@mui/icons-material/Add";
+import EditEventModal from "../../modals/event/EditEventModal";
 // ICON
 
 const AddEventComponent = () => {
@@ -20,6 +21,7 @@ const AddEventComponent = () => {
         Event
       </Button>
       <AddEventModal isOpen={isOpen} onClose={onClose} />
+      <EditEventModal />
     </>
   );
 };

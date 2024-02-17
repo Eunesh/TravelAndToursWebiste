@@ -1,0 +1,12 @@
+mutation UpdatePlace($id: ID!, $name: String, $description: String) {
+  updatePlace(id: $id, name: $name, description: $description) {
+    id
+    name
+    description
+    pictureUrls
+    events {
+      id
+      name
+    }
+  }
+}
