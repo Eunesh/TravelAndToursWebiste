@@ -45,6 +45,7 @@ const EditEventModal = () => {
         <ModalContainer
           isOpen={isOpen}
           onClose={onClose}
+          hasFooter={false}
           title={`Edit ${selectedEvent.name}`}
         >
           <Formik

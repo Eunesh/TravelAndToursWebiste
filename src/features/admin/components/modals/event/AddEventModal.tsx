@@ -32,7 +32,7 @@ const AddEventModal: FC<IModal> = ({ isOpen, onClose }) => {
       });
   };
   return (
-    <ModalContainer isOpen={isOpen} onClose={onClose} title="Add A New Event">
+    <ModalContainer hasFooter={false} isOpen={isOpen} onClose={onClose} title="Add A New Event">
       <Formik
         initialValues={{ name: "", description: "", placeId: "" }}
         validationSchema={addEventSchema}

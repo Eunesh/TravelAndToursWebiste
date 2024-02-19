@@ -45,6 +45,7 @@ const EditPlaceModal = () => {
         <ModalContainer
           isOpen={isOpen}
           onClose={onClose}
+          hasFooter={false}
           title={`Edit ${selectedPlace.name}`}
         >
           <Formik

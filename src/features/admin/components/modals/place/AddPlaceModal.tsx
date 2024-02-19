@@ -32,7 +32,12 @@ const AddPlaceModal: FC<IModal> = ({ isOpen, onClose }) => {
       });
   };
   return (
-    <ModalContainer isOpen={isOpen} onClose={onClose} title="Add A New Place">
+    <ModalContainer
+      isOpen={isOpen}
+      hasFooter={false}
+      onClose={onClose}
+      title="Add A New Place"
+    >
       <Formik
         initialValues={{ name: "", description: "" }}
         validationSchema={addPlaceSchema}
