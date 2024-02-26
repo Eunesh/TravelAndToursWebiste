@@ -3,6 +3,7 @@ query FetchEventsData {
     id
     name
     description
+    bannerUrl
     pictureUrls
     place {
       id

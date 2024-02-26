@@ -14,6 +14,8 @@ const AddBannerImageField: FC<IAddBannerImageField> = () => {
   const [src, setSrc] = useState<any>(null);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("Value",event.target.value)
+    console.log("File",event.target.files)
     if (event.target?.files?.[0]) {
       helper.setValue(event.target.files[0]);
     }

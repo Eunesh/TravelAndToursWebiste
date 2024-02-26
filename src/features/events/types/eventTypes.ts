@@ -2,6 +2,7 @@ export type AddEventType = {
   name: string;
   description: string;
   placeId: string;
+  banner?: File | string;
 };
 
 export type EditEventType = {

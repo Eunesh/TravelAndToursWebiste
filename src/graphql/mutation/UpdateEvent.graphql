@@ -8,6 +8,7 @@ mutation UpdateEvent($id: ID!, $name: String, $description: String, $placeId: ID
     id
     name
     description
+    bannerUrl
     pictureUrls
     place {
       id

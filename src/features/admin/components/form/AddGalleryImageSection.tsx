@@ -5,7 +5,6 @@ import convertToBase64 from "../../utils/convertToBase64";
 
 //ICONS
 import DeleteIcon from "@mui/icons-material/Delete";
-import { number } from "yup";
 //ICONS
 
 const RenderImage = ({ picture }: { picture: any }) => {

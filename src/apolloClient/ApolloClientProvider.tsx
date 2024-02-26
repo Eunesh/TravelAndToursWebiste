@@ -3,12 +3,13 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  HttpLink,
 } from "@apollo/client";
+
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: new HttpLink({
+  link: createUploadLink({
     uri: import.meta.env.VITE_API_GRAPHQL_URL,
     credentials: "include", // include cookies
   }),
