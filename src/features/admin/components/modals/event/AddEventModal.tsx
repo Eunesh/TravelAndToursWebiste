@@ -14,7 +14,7 @@ const AddEventModal: FC<IModal> = ({ isOpen, onClose }) => {
   const [createEvent] = useCreateEventMutation();
   const dispatch = useDispatch();
   const handleSubmit = (values: AddEventType, { setSubmitting }: any) => {
-    createEvent({ variables: { banner: null, ...values } })
+    createEvent({ variables: { banner: null, pictures: null, ...values } })
       .then((response) => response.data)
       .then((data) => data?.createEvent)
       .then((creaeEvent) => creaeEvent?.event)

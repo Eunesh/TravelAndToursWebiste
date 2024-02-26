@@ -3,12 +3,14 @@ mutation CreateEvent(
   $description: String!
   $placeId: ID!
   $banner: Upload
+  $pictures: [Upload!]
 ) {
   createEvent(
     name: $name
     description: $description
     placeId: $placeId
     banner: $banner
+    pictures: $pictures
   ) {
     event {
       id

@@ -32,20 +32,20 @@ const AddGalleryImageSection = () => {
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target?.files?.[0]) {
-      const files = Array.from(event.target.files).map(
-        (file: any, index: number) => ({
-          id: index,
-          value: file,
-        })
-      );
-      helper.setValue(files);
+      helper.setValue(event.target.files);
     }
+  };
+
+  const getFormattedData = (data: [File | string]) => {
+    return Array.from(data).map((file: any, index: number) => ({
+      id: index,
+      value: file,
+    }));
   };
 
   const handleDeleteImage = (id: number) => {
     const pictures = JSON.parse(JSON.stringify(field.value));
     const newPictures = pictures.filter((picture: any) => picture.id != id);
-    console.log(newPictures);
     helper.setValue(newPictures);
   };
 
@@ -67,7 +67,7 @@ const AddGalleryImageSection = () => {
       {/* Added Image List */}
       <Stack spacing={5} p={2}>
         {field.value &&
-          field.value.map((picture: any) => (
+          getFormattedData(field.value).map((picture: any) => (
             <Flex gap={5} alignItems="center" key={picture.id}>
               <RenderImage picture={picture.value} />
               <Button

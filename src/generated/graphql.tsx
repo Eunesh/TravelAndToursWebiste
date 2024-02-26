@@ -145,6 +145,7 @@ export type CreateEventMutationVariables = Exact<{
   description: Scalars['String']['input'];
   placeId: Scalars['ID']['input'];
   banner?: InputMaybe<Scalars['Upload']['input']>;
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']> | Scalars['Upload']['input']>;
 }>;
 
 
@@ -229,12 +230,13 @@ export type FetchPlacesDataQuery = { __typename?: 'Query', places: Array<{ __typ
 
 
 export const CreateEventDocument = gql`
-    mutation CreateEvent($name: String!, $description: String!, $placeId: ID!, $banner: Upload) {
+    mutation CreateEvent($name: String!, $description: String!, $placeId: ID!, $banner: Upload, $pictures: [Upload!]) {
   createEvent(
     name: $name
     description: $description
     placeId: $placeId
     banner: $banner
+    pictures: $pictures
   ) {
     event {
       id
@@ -270,6 +272,7 @@ export type CreateEventMutationFn = Apollo.MutationFunction<CreateEventMutation,
  *      description: // value for 'description'
  *      placeId: // value for 'placeId'
  *      banner: // value for 'banner'
+ *      pictures: // value for 'pictures'
  *   },
  * });
  */
