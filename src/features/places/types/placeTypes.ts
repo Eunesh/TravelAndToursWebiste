@@ -4,6 +4,8 @@ import { EventAndPlaceInListType } from "../../events/types/eventTypes";
 export type AddPlaceType = {
   name: string;
   description: string;
+  banner?: File;
+  pictures?: [File];
 };
 
 export type EditPlaceType = {

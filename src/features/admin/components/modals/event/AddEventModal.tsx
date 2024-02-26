@@ -17,7 +17,7 @@ const AddEventModal: FC<IModal> = ({ isOpen, onClose }) => {
     createEvent({ variables: { banner: null, pictures: null, ...values } })
       .then((response) => response.data)
       .then((data) => data?.createEvent)
-      .then((creaeEvent) => creaeEvent?.event)
+      .then((createEvent) => createEvent?.event)
       .then((event: any) => {
         if (event) {
           toast.success(`${event.name} created successfully.`);

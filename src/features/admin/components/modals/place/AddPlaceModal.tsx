@@ -14,9 +14,10 @@ const AddPlaceModal: FC<IModal> = ({ isOpen, onClose }) => {
   const [createPlace] = useCreatePlaceMutation();
   const dispatch = useDispatch();
   const handleSubmit = (values: AddPlaceType, { setSubmitting }: any) => {
-    createPlace({ variables: values })
+    createPlace({ variables: { banner: null, pictures: null, ...values } })
       .then((response) => response.data)
       .then((data) => data?.createPlace)
+      .then((createPlace) => createPlace?.place)
       .then((place: any) => {
         if (place) {
           toast.success(`${place.name} created successfully`);

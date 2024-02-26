@@ -32,20 +32,13 @@ const AddGalleryImageSection = () => {
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target?.files?.[0]) {
-      helper.setValue(event.target.files);
+      helper.setValue(Array.from(event.target.files));
     }
   };
 
-  const getFormattedData = (data: [File | string]) => {
-    return Array.from(data).map((file: any, index: number) => ({
-      id: index,
-      value: file,
-    }));
-  };
-
-  const handleDeleteImage = (id: number) => {
-    const pictures = JSON.parse(JSON.stringify(field.value));
-    const newPictures = pictures.filter((picture: any) => picture.id != id);
+  const handleDeleteImage = (name: string) => {
+    const pictures = field.value.filter((item: any) => true); // Making a shallow copy. Not don't use JSON.parse & stringify to make deep copy. (the content cannot be serialized)
+    const newPictures = pictures.filter((picture: any) => picture.name != name);
     helper.setValue(newPictures);
   };
 
@@ -67,11 +60,11 @@ const AddGalleryImageSection = () => {
       {/* Added Image List */}
       <Stack spacing={5} p={2}>
         {field.value &&
-          getFormattedData(field.value).map((picture: any) => (
-            <Flex gap={5} alignItems="center" key={picture.id}>
-              <RenderImage picture={picture.value} />
+          field.value.map((picture: any) => (
+            <Flex gap={5} alignItems="center" key={picture.name}>
+              <RenderImage picture={picture} />
               <Button
-                onClick={() => handleDeleteImage(picture.id)}
+                onClick={() => handleDeleteImage(picture.name)}
                 colorScheme="red"
                 variant="solid"
               >
