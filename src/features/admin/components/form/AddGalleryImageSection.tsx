@@ -36,7 +36,9 @@ const AddGalleryImageSection = () => {
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target?.files?.[0]) {
-      helper.setValue(Array.from(event.target.files));
+      const newFiles = Array.from(event.target.files);
+      const filesFromPrev = field.value.filter((value:any) => typeof value == 'string')
+      helper.setValue([...newFiles, ...filesFromPrev]);
     }
   };
 

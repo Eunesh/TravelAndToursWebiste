@@ -12,6 +12,7 @@ import { addPlaceSchema } from "../../../schemas/placeSchemas";
 import AddPlaceFormComponents from "../../form/AddPlaceFormComponents";
 import { useUpdatePlaceMutation } from "../../../../../generated/graphql";
 import { toast } from "react-toastify";
+import { getUpdatePlaceDS } from "../../../utils/processEventAndPlaces";
 
 const EditPlaceModal = () => {
   const [updatePlace] = useUpdatePlaceMutation();
@@ -22,7 +23,8 @@ const EditPlaceModal = () => {
     dispatch(clearSelectedPlace());
   };
   const handleSubmit = (values: EditPlaceType, { setSubmitting }: any) => {
-    updatePlace({ variables: values })
+    const editData = getUpdatePlaceDS(values)
+    updatePlace({ variables: editData })
       .then((response) => response.data)
       .then((data) => data?.updatePlace)
       .then((place: any) => {
@@ -53,6 +55,8 @@ const EditPlaceModal = () => {
               id: selectedPlace.id,
               name: selectedPlace.name,
               description: selectedPlace.description,
+              banner: selectedPlace.bannerUrl && import.meta.env.VITE_API_BASE_URL + selectedPlace.bannerUrl,
+              pictures: selectedPlace.pictureUrls.map((url:string) => import.meta.env.VITE_API_BASE_URL + url),
             }}
             validationSchema={addPlaceSchema}
             enableReinitialize={true}

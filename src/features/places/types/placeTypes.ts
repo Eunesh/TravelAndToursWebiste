@@ -5,13 +5,15 @@ export type AddPlaceType = {
   name: string;
   description: string;
   banner?: File;
-  pictures?: [File];
+  pictures?: File[];
 };
 
 export type EditPlaceType = {
   id: string;
   name: string;
   description: string;
+  banner?: File;
+  pictures?: File[];
 };
 export type PlaceType = {
   id: number;

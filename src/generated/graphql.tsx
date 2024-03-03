@@ -98,9 +98,11 @@ export type MutationUpdateEventArgs = {
 
 
 export type MutationUpdatePlaceArgs = {
+  banner?: InputMaybe<Scalars['Upload']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['ID']['input'];
   name?: InputMaybe<Scalars['String']['input']>;
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']>>;
 };
 
 export type Place = {
@@ -207,10 +209,12 @@ export type UpdatePlaceMutationVariables = Exact<{
   id: Scalars['ID']['input'];
   name?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  banner?: InputMaybe<Scalars['Upload']['input']>;
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']> | Scalars['Upload']['input']>;
 }>;
 
 
-export type UpdatePlaceMutation = { __typename?: 'Mutation', updatePlace?: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } | null };
+export type UpdatePlaceMutation = { __typename?: 'Mutation', updatePlace?: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, bannerUrl?: string | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } | null };
 
 export type FetchEventQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -495,12 +499,19 @@ export type UpdateEventMutationHookResult = ReturnType<typeof useUpdateEventMuta
 export type UpdateEventMutationResult = Apollo.MutationResult<UpdateEventMutation>;
 export type UpdateEventMutationOptions = Apollo.BaseMutationOptions<UpdateEventMutation, UpdateEventMutationVariables>;
 export const UpdatePlaceDocument = gql`
-    mutation UpdatePlace($id: ID!, $name: String, $description: String) {
-  updatePlace(id: $id, name: $name, description: $description) {
+    mutation UpdatePlace($id: ID!, $name: String, $description: String, $banner: Upload, $pictures: [Upload!]) {
+  updatePlace(
+    id: $id
+    name: $name
+    description: $description
+    banner: $banner
+    pictures: $pictures
+  ) {
     id
     name
     description
     pictureUrls
+    bannerUrl
     events {
       id
       name
@@ -526,6 +537,8 @@ export type UpdatePlaceMutationFn = Apollo.MutationFunction<UpdatePlaceMutation,
  *      id: // value for 'id'
  *      name: // value for 'name'
  *      description: // value for 'description'
+ *      banner: // value for 'banner'
+ *      pictures: // value for 'pictures'
  *   },
  * });
  */
