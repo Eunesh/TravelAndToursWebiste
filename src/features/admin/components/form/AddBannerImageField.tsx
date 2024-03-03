@@ -6,9 +6,7 @@ import convertToBase64 from "../../utils/convertToBase64";
 // Upload image - image
 import uploadImg from "../../../../assets/images/upload.png";
 
-interface IAddBannerImageField {}
-
-const AddBannerImageField: FC<IAddBannerImageField> = () => {
+const AddBannerImageField = () => {
   const [field, _meta, helper] = useField("banner");
 
   const [src, setSrc] = useState<any>(null);
@@ -20,7 +18,9 @@ const AddBannerImageField: FC<IAddBannerImageField> = () => {
   };
 
   useEffect(() => {
-    if (field.value && field.value != "") {
+    if (typeof field.value == "string") {
+      setSrc(field.value);
+    } else if (field.value && field.value != "") {
       convertToBase64(field.value).then((value) => {
         setSrc(value);
       });

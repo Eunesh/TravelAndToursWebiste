@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Image, Stack, Text } from "@chakra-ui/react";
 import { useField } from "formik";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import convertToBase64 from "../../utils/convertToBase64";
 
 //ICONS
@@ -12,9 +12,13 @@ const RenderImage = ({ picture }: { picture: any }) => {
 
   useEffect(() => {
     if (picture) {
-      convertToBase64(picture).then((value) => {
-        setSrc(value);
-      });
+      if (typeof picture == "string") {
+        setSrc(picture);
+      } else {
+        convertToBase64(picture).then((value) => {
+          setSrc(value);
+        });
+      }
     }
   }, [picture]);
 
@@ -36,10 +40,13 @@ const AddGalleryImageSection = () => {
     }
   };
 
-  const handleDeleteImage = (name: string) => {
-    const pictures = field.value.filter((item: any) => true); // Making a shallow copy. Not don't use JSON.parse & stringify to make deep copy. (the content cannot be serialized)
-    const newPictures = pictures.filter((picture: any) => picture.name != name);
-    helper.setValue(newPictures);
+  const handleDeleteImage = (index: number) => {
+    const pictures = field.value.filter((_item: any) => true); // Making a shallow copy. Not don't use JSON.parse & stringify to make deep copy. (the content cannot be serialized)
+    let picture = pictures[index];
+    if (typeof picture == "string") {
+    }
+    pictures.splice(index, 1);
+    helper.setValue(pictures);
   };
 
   return (
@@ -60,11 +67,15 @@ const AddGalleryImageSection = () => {
       {/* Added Image List */}
       <Stack spacing={5} p={2}>
         {field.value &&
-          field.value.map((picture: any) => (
-            <Flex gap={5} alignItems="center" key={picture.name}>
+          field.value.map((picture: any, index: number) => (
+            <Flex
+              gap={5}
+              alignItems="center"
+              key={picture.name || `url-${index}-${picture}`}
+            >
               <RenderImage picture={picture} />
               <Button
-                onClick={() => handleDeleteImage(picture.name)}
+                onClick={() => handleDeleteImage(index)}
                 colorScheme="red"
                 variant="solid"
               >

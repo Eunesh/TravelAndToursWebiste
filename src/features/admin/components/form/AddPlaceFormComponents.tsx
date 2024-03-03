@@ -2,15 +2,15 @@ import { Stack } from "@chakra-ui/react";
 import { useFormikContext } from "formik";
 import TextInput from "../../../../components/common/form/TextInput";
 import SubmitBtnOrProgressSpinner from "../miscellaneous/SubmitBtnOrProgressSpinner";
-
-// ICON
-import PlaceIcon from "@mui/icons-material/Place";
 import WysiwygField from "../../../../components/wysiwyg/WysiwygField";
 import AddBannerImageField from "./AddBannerImageField";
 import AddGalleryImageSection from "./AddGalleryImageSection";
+
+// ICON
+import PlaceIcon from "@mui/icons-material/Place";
 // ICON
 
-const AddPlaceFormComponents = () => {
+const AddPlaceFormComponents =() => {
   const { handleSubmit, isSubmitting } = useFormikContext();
   return (
     <form onSubmit={handleSubmit}>

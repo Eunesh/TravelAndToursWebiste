@@ -88,9 +88,11 @@ export type MutationDeletePlaceArgs = {
 
 
 export type MutationUpdateEventArgs = {
+  banner?: InputMaybe<Scalars['Upload']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['ID']['input'];
   name?: InputMaybe<Scalars['String']['input']>;
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']>>;
   placeId?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -194,6 +196,8 @@ export type UpdateEventMutationVariables = Exact<{
   name?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   placeId?: InputMaybe<Scalars['ID']['input']>;
+  banner?: InputMaybe<Scalars['Upload']['input']>;
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']> | Scalars['Upload']['input']>;
 }>;
 
 
@@ -438,8 +442,15 @@ export type DeletePlaceMutationHookResult = ReturnType<typeof useDeletePlaceMuta
 export type DeletePlaceMutationResult = Apollo.MutationResult<DeletePlaceMutation>;
 export type DeletePlaceMutationOptions = Apollo.BaseMutationOptions<DeletePlaceMutation, DeletePlaceMutationVariables>;
 export const UpdateEventDocument = gql`
-    mutation UpdateEvent($id: ID!, $name: String, $description: String, $placeId: ID) {
-  updateEvent(id: $id, name: $name, description: $description, placeId: $placeId) {
+    mutation UpdateEvent($id: ID!, $name: String, $description: String, $placeId: ID, $banner: Upload, $pictures: [Upload!]) {
+  updateEvent(
+    id: $id
+    name: $name
+    description: $description
+    placeId: $placeId
+    banner: $banner
+    pictures: $pictures
+  ) {
     id
     name
     description
@@ -471,6 +482,8 @@ export type UpdateEventMutationFn = Apollo.MutationFunction<UpdateEventMutation,
  *      name: // value for 'name'
  *      description: // value for 'description'
  *      placeId: // value for 'placeId'
+ *      banner: // value for 'banner'
+ *      pictures: // value for 'pictures'
  *   },
  * });
  */

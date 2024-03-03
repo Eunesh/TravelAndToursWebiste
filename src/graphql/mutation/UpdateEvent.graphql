@@ -1,9 +1,18 @@
-mutation UpdateEvent($id: ID!, $name: String, $description: String, $placeId: ID ) {
+mutation UpdateEvent(
+  $id: ID!
+  $name: String
+  $description: String
+  $placeId: ID
+  $banner: Upload
+  $pictures: [Upload!]
+) {
   updateEvent(
     id: $id
     name: $name
     description: $description
     placeId: $placeId
+    banner: $banner
+    pictures: $pictures
   ) {
     id
     name
