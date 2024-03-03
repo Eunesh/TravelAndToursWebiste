@@ -3,6 +3,7 @@ query FetchEvent($id: ID!){
     id
     name
     description
+    bannerUrl
     pictureUrls
     place {
       id

@@ -1,0 +1,3 @@
+mutation DeleteBlob($url: String!) {
+  deleteBlob(url: $url)
+}

@@ -15,6 +15,7 @@ import {
 } from "../../../../events/slice/eventSlice";
 import RenderDescription from "../cellRenderer/RenderDescription";
 import RenderEventActions from "../cellRenderer/RenderEventActions";
+import RenderBanner from "../cellRenderer/RenderBanner";
 
 // Column Definitions: Defines & controls grid columns.
 const colDefs = [
@@ -26,6 +27,11 @@ const colDefs = [
     flex: 1,
     minWidth: 200,
     cellRenderer: RenderDescription,
+  },
+  {
+    field: "bannerUrl",
+    headerName: "Banner",
+    cellRenderer: RenderBanner,
   },
   {
     field: "pictureUrls",

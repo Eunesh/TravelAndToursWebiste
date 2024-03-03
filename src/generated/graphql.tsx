@@ -16,10 +16,24 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   ISO8601DateTime: { input: any; output: any; }
+  Upload: { input: any; output: any; }
+};
+
+export type CreateEventPayload = {
+  __typename?: 'CreateEventPayload';
+  error?: Maybe<Array<Scalars['String']['output']>>;
+  event?: Maybe<Event>;
+};
+
+export type CreatePlacePayload = {
+  __typename?: 'CreatePlacePayload';
+  error?: Maybe<Array<Scalars['String']['output']>>;
+  place?: Maybe<Place>;
 };
 
 export type Event = {
   __typename?: 'Event';
+  bannerUrl?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['ISO8601DateTime']['output'];
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
@@ -31,8 +45,9 @@ export type Event = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createEvent?: Maybe<Event>;
-  createPlace?: Maybe<Place>;
+  createEvent?: Maybe<CreateEventPayload>;
+  createPlace?: Maybe<CreatePlacePayload>;
+  deleteBlob?: Maybe<Scalars['String']['output']>;
   deleteEvent?: Maybe<Scalars['String']['output']>;
   deletePlace?: Maybe<Scalars['String']['output']>;
   updateEvent?: Maybe<Event>;
@@ -41,15 +56,24 @@ export type Mutation = {
 
 
 export type MutationCreateEventArgs = {
+  banner?: InputMaybe<Scalars['Upload']['input']>;
   description: Scalars['String']['input'];
   name: Scalars['String']['input'];
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']>>;
   placeId: Scalars['ID']['input'];
 };
 
 
 export type MutationCreatePlaceArgs = {
+  banner?: InputMaybe<Scalars['Upload']['input']>;
   description: Scalars['String']['input'];
   name: Scalars['String']['input'];
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']>>;
+};
+
+
+export type MutationDeleteBlobArgs = {
+  url: Scalars['String']['input'];
 };
 
 
@@ -64,21 +88,26 @@ export type MutationDeletePlaceArgs = {
 
 
 export type MutationUpdateEventArgs = {
+  banner?: InputMaybe<Scalars['Upload']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['ID']['input'];
   name?: InputMaybe<Scalars['String']['input']>;
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']>>;
   placeId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationUpdatePlaceArgs = {
+  banner?: InputMaybe<Scalars['Upload']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['ID']['input'];
   name?: InputMaybe<Scalars['String']['input']>;
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']>>;
 };
 
 export type Place = {
   __typename?: 'Place';
+  bannerUrl?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['ISO8601DateTime']['output'];
   description?: Maybe<Scalars['String']['output']>;
   events?: Maybe<Array<Event>>;
@@ -126,18 +155,29 @@ export type CreateEventMutationVariables = Exact<{
   name: Scalars['String']['input'];
   description: Scalars['String']['input'];
   placeId: Scalars['ID']['input'];
+  banner?: InputMaybe<Scalars['Upload']['input']>;
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']> | Scalars['Upload']['input']>;
 }>;
 
 
-export type CreateEventMutation = { __typename?: 'Mutation', createEvent?: { __typename?: 'Event', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null } | null } | null };
+export type CreateEventMutation = { __typename?: 'Mutation', createEvent?: { __typename?: 'CreateEventPayload', error?: Array<string> | null, event?: { __typename?: 'Event', id: string, name?: string | null, description?: string | null, bannerUrl?: string | null, pictureUrls?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null } | null } | null } | null };
 
 export type CreatePlaceMutationVariables = Exact<{
   name: Scalars['String']['input'];
   description: Scalars['String']['input'];
+  banner?: InputMaybe<Scalars['Upload']['input']>;
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']> | Scalars['Upload']['input']>;
 }>;
 
 
-export type CreatePlaceMutation = { __typename?: 'Mutation', createPlace?: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } | null };
+export type CreatePlaceMutation = { __typename?: 'Mutation', createPlace?: { __typename?: 'CreatePlacePayload', error?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, bannerUrl?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } | null } | null };
+
+export type DeleteBlobMutationVariables = Exact<{
+  url: Scalars['String']['input'];
+}>;
+
+
+export type DeleteBlobMutation = { __typename?: 'Mutation', deleteBlob?: string | null };
 
 export type DeleteEventMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -158,38 +198,42 @@ export type UpdateEventMutationVariables = Exact<{
   name?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   placeId?: InputMaybe<Scalars['ID']['input']>;
+  banner?: InputMaybe<Scalars['Upload']['input']>;
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']> | Scalars['Upload']['input']>;
 }>;
 
 
-export type UpdateEventMutation = { __typename?: 'Mutation', updateEvent?: { __typename?: 'Event', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null } | null } | null };
+export type UpdateEventMutation = { __typename?: 'Mutation', updateEvent?: { __typename?: 'Event', id: string, name?: string | null, description?: string | null, bannerUrl?: string | null, pictureUrls?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null } | null } | null };
 
 export type UpdatePlaceMutationVariables = Exact<{
   id: Scalars['ID']['input'];
   name?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  banner?: InputMaybe<Scalars['Upload']['input']>;
+  pictures?: InputMaybe<Array<Scalars['Upload']['input']> | Scalars['Upload']['input']>;
 }>;
 
 
-export type UpdatePlaceMutation = { __typename?: 'Mutation', updatePlace?: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } | null };
+export type UpdatePlaceMutation = { __typename?: 'Mutation', updatePlace?: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, bannerUrl?: string | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } | null };
 
 export type FetchEventQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type FetchEventQuery = { __typename?: 'Query', event: { __typename?: 'Event', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null } | null } };
+export type FetchEventQuery = { __typename?: 'Query', event: { __typename?: 'Event', id: string, name?: string | null, description?: string | null, bannerUrl?: string | null, pictureUrls?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null } | null } };
 
 export type FetchEventsDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchEventsDataQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null } | null }> };
+export type FetchEventsDataQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name?: string | null, description?: string | null, bannerUrl?: string | null, pictureUrls?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null } | null }> };
 
 export type FetchPlaceQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type FetchPlaceQuery = { __typename?: 'Query', place: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } };
+export type FetchPlaceQuery = { __typename?: 'Query', place: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, bannerUrl?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } };
 
 export type FetchPlacesDdQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -199,20 +243,30 @@ export type FetchPlacesDdQuery = { __typename?: 'Query', places: Array<{ __typen
 export type FetchPlacesDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchPlacesDataQuery = { __typename?: 'Query', places: Array<{ __typename?: 'Place', id: string, name?: string | null, description?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null }> };
+export type FetchPlacesDataQuery = { __typename?: 'Query', places: Array<{ __typename?: 'Place', id: string, name?: string | null, description?: string | null, bannerUrl?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null }> };
 
 
 export const CreateEventDocument = gql`
-    mutation CreateEvent($name: String!, $description: String!, $placeId: ID!) {
-  createEvent(name: $name, description: $description, placeId: $placeId) {
-    id
-    name
-    description
-    pictureUrls
-    place {
+    mutation CreateEvent($name: String!, $description: String!, $placeId: ID!, $banner: Upload, $pictures: [Upload!]) {
+  createEvent(
+    name: $name
+    description: $description
+    placeId: $placeId
+    banner: $banner
+    pictures: $pictures
+  ) {
+    event {
       id
       name
+      description
+      bannerUrl
+      pictureUrls
+      place {
+        id
+        name
+      }
     }
+    error
   }
 }
     `;
@@ -234,6 +288,8 @@ export type CreateEventMutationFn = Apollo.MutationFunction<CreateEventMutation,
  *      name: // value for 'name'
  *      description: // value for 'description'
  *      placeId: // value for 'placeId'
+ *      banner: // value for 'banner'
+ *      pictures: // value for 'pictures'
  *   },
  * });
  */
@@ -245,16 +301,25 @@ export type CreateEventMutationHookResult = ReturnType<typeof useCreateEventMuta
 export type CreateEventMutationResult = Apollo.MutationResult<CreateEventMutation>;
 export type CreateEventMutationOptions = Apollo.BaseMutationOptions<CreateEventMutation, CreateEventMutationVariables>;
 export const CreatePlaceDocument = gql`
-    mutation CreatePlace($name: String!, $description: String!) {
-  createPlace(name: $name, description: $description) {
-    id
-    name
-    description
-    pictureUrls
-    events {
+    mutation CreatePlace($name: String!, $description: String!, $banner: Upload, $pictures: [Upload!]) {
+  createPlace(
+    name: $name
+    description: $description
+    banner: $banner
+    pictures: $pictures
+  ) {
+    place {
       id
       name
+      description
+      bannerUrl
+      pictureUrls
+      events {
+        id
+        name
+      }
     }
+    error
   }
 }
     `;
@@ -275,6 +340,8 @@ export type CreatePlaceMutationFn = Apollo.MutationFunction<CreatePlaceMutation,
  *   variables: {
  *      name: // value for 'name'
  *      description: // value for 'description'
+ *      banner: // value for 'banner'
+ *      pictures: // value for 'pictures'
  *   },
  * });
  */
@@ -285,6 +352,37 @@ export function useCreatePlaceMutation(baseOptions?: Apollo.MutationHookOptions<
 export type CreatePlaceMutationHookResult = ReturnType<typeof useCreatePlaceMutation>;
 export type CreatePlaceMutationResult = Apollo.MutationResult<CreatePlaceMutation>;
 export type CreatePlaceMutationOptions = Apollo.BaseMutationOptions<CreatePlaceMutation, CreatePlaceMutationVariables>;
+export const DeleteBlobDocument = gql`
+    mutation DeleteBlob($url: String!) {
+  deleteBlob(url: $url)
+}
+    `;
+export type DeleteBlobMutationFn = Apollo.MutationFunction<DeleteBlobMutation, DeleteBlobMutationVariables>;
+
+/**
+ * __useDeleteBlobMutation__
+ *
+ * To run a mutation, you first call `useDeleteBlobMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteBlobMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteBlobMutation, { data, loading, error }] = useDeleteBlobMutation({
+ *   variables: {
+ *      url: // value for 'url'
+ *   },
+ * });
+ */
+export function useDeleteBlobMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBlobMutation, DeleteBlobMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteBlobMutation, DeleteBlobMutationVariables>(DeleteBlobDocument, options);
+      }
+export type DeleteBlobMutationHookResult = ReturnType<typeof useDeleteBlobMutation>;
+export type DeleteBlobMutationResult = Apollo.MutationResult<DeleteBlobMutation>;
+export type DeleteBlobMutationOptions = Apollo.BaseMutationOptions<DeleteBlobMutation, DeleteBlobMutationVariables>;
 export const DeleteEventDocument = gql`
     mutation DeleteEvent($id: ID!) {
   deleteEvent(id: $id)
@@ -348,11 +446,19 @@ export type DeletePlaceMutationHookResult = ReturnType<typeof useDeletePlaceMuta
 export type DeletePlaceMutationResult = Apollo.MutationResult<DeletePlaceMutation>;
 export type DeletePlaceMutationOptions = Apollo.BaseMutationOptions<DeletePlaceMutation, DeletePlaceMutationVariables>;
 export const UpdateEventDocument = gql`
-    mutation UpdateEvent($id: ID!, $name: String, $description: String, $placeId: ID) {
-  updateEvent(id: $id, name: $name, description: $description, placeId: $placeId) {
+    mutation UpdateEvent($id: ID!, $name: String, $description: String, $placeId: ID, $banner: Upload, $pictures: [Upload!]) {
+  updateEvent(
+    id: $id
+    name: $name
+    description: $description
+    placeId: $placeId
+    banner: $banner
+    pictures: $pictures
+  ) {
     id
     name
     description
+    bannerUrl
     pictureUrls
     place {
       id
@@ -380,6 +486,8 @@ export type UpdateEventMutationFn = Apollo.MutationFunction<UpdateEventMutation,
  *      name: // value for 'name'
  *      description: // value for 'description'
  *      placeId: // value for 'placeId'
+ *      banner: // value for 'banner'
+ *      pictures: // value for 'pictures'
  *   },
  * });
  */
@@ -391,12 +499,19 @@ export type UpdateEventMutationHookResult = ReturnType<typeof useUpdateEventMuta
 export type UpdateEventMutationResult = Apollo.MutationResult<UpdateEventMutation>;
 export type UpdateEventMutationOptions = Apollo.BaseMutationOptions<UpdateEventMutation, UpdateEventMutationVariables>;
 export const UpdatePlaceDocument = gql`
-    mutation UpdatePlace($id: ID!, $name: String, $description: String) {
-  updatePlace(id: $id, name: $name, description: $description) {
+    mutation UpdatePlace($id: ID!, $name: String, $description: String, $banner: Upload, $pictures: [Upload!]) {
+  updatePlace(
+    id: $id
+    name: $name
+    description: $description
+    banner: $banner
+    pictures: $pictures
+  ) {
     id
     name
     description
     pictureUrls
+    bannerUrl
     events {
       id
       name
@@ -422,6 +537,8 @@ export type UpdatePlaceMutationFn = Apollo.MutationFunction<UpdatePlaceMutation,
  *      id: // value for 'id'
  *      name: // value for 'name'
  *      description: // value for 'description'
+ *      banner: // value for 'banner'
+ *      pictures: // value for 'pictures'
  *   },
  * });
  */
@@ -438,6 +555,7 @@ export const FetchEventDocument = gql`
     id
     name
     description
+    bannerUrl
     pictureUrls
     place {
       id
@@ -485,6 +603,7 @@ export const FetchEventsDataDocument = gql`
     id
     name
     description
+    bannerUrl
     pictureUrls
     place {
       id
@@ -531,6 +650,7 @@ export const FetchPlaceDocument = gql`
     id
     name
     description
+    bannerUrl
     pictureUrls
     events {
       id
@@ -618,6 +738,7 @@ export const FetchPlacesDataDocument = gql`
     id
     name
     description
+    bannerUrl
     pictureUrls
     events {
       id

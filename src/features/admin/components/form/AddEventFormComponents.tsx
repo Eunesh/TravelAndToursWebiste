@@ -2,11 +2,13 @@ import { Stack } from "@chakra-ui/react";
 import { useFormikContext } from "formik";
 import TextInput from "../../../../components/common/form/TextInput";
 import SubmitBtnOrProgressSpinner from "../miscellaneous/SubmitBtnOrProgressSpinner";
+import WysiwygField from "../../../../components/wysiwyg/WysiwygField";
+import SelectPlaceDD from "./SelectPlaceDD";
+import AddBannerImageField from "./AddBannerImageField";
+import AddGalleryImageSection from "./AddGalleryImageSection";
 
 // ICON
 import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
-import WysiwygField from "../../../../components/wysiwyg/WysiwygField";
-import SelectPlaceDD from "./SelectPlaceDD";
 // ICON
 
 const AddEventFormComponents = () => {
@@ -19,10 +21,10 @@ const AddEventFormComponents = () => {
           placeholder="Enter the event name..."
           icon={() => <AirplaneTicketIcon />}
         />
-
         <SelectPlaceDD />
-
         <WysiwygField name="description" label="Add A Description" />
+        <AddBannerImageField />
+        <AddGalleryImageSection />
         <SubmitBtnOrProgressSpinner isSubmitting={isSubmitting} />
       </Stack>
     </form>

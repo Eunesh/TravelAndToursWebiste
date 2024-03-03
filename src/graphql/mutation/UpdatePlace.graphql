@@ -1,9 +1,22 @@
-mutation UpdatePlace($id: ID!, $name: String, $description: String) {
-  updatePlace(id: $id, name: $name, description: $description) {
+mutation UpdatePlace(
+  $id: ID!
+  $name: String
+  $description: String
+  $banner: Upload
+  $pictures: [Upload!]
+) {
+  updatePlace(
+    id: $id
+    name: $name
+    description: $description
+    banner: $banner
+    pictures: $pictures
+  ) {
     id
     name
     description
     pictureUrls
+    bannerUrl
     events {
       id
       name

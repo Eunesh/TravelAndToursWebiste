@@ -14,9 +14,10 @@ const AddEventModal: FC<IModal> = ({ isOpen, onClose }) => {
   const [createEvent] = useCreateEventMutation();
   const dispatch = useDispatch();
   const handleSubmit = (values: AddEventType, { setSubmitting }: any) => {
-    createEvent({ variables: values })
+    createEvent({ variables: { banner: null, pictures: null, ...values } })
       .then((response) => response.data)
       .then((data) => data?.createEvent)
+      .then((createEvent) => createEvent?.event)
       .then((event: any) => {
         if (event) {
           toast.success(`${event.name} created successfully.`);
@@ -32,7 +33,12 @@ const AddEventModal: FC<IModal> = ({ isOpen, onClose }) => {
       });
   };
   return (
-    <ModalContainer isOpen={isOpen} onClose={onClose} title="Add A New Event">
+    <ModalContainer
+      hasFooter={false}
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Add A New Event"
+    >
       <Formik
         initialValues={{ name: "", description: "", placeId: "" }}
         validationSchema={addEventSchema}

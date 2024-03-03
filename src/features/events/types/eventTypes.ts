@@ -2,6 +2,8 @@ export type AddEventType = {
   name: string;
   description: string;
   placeId: string;
+  banner?: File;
+  pictures?: File[];
 };
 
 export type EditEventType = {
@@ -9,6 +11,8 @@ export type EditEventType = {
   name: string;
   description: string;
   placeId: string;
+  banner?: File;
+  pictures?: File[];
 };
 
 export type EventType = {

@@ -1,16 +1,28 @@
-mutation CreateEvent($name: String!, $description: String!, $placeId: ID! ) {
+mutation CreateEvent(
+  $name: String!
+  $description: String!
+  $placeId: ID!
+  $banner: Upload
+  $pictures: [Upload!]
+) {
   createEvent(
     name: $name
     description: $description
     placeId: $placeId
+    banner: $banner
+    pictures: $pictures
   ) {
-    id
-    name
-    description
-    pictureUrls
-    place {
+    event {
       id
       name
+      description
+      bannerUrl
+      pictureUrls
+      place {
+        id
+        name
+      }
     }
+    error
   }
 }
