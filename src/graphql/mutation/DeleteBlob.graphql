@@ -1,3 +1,27 @@
 mutation DeleteBlob($url: String!) {
-  deleteBlob(url: $url)
+  deleteBlob(url: $url) {
+    event {
+      id
+      name
+      description
+      bannerUrl
+      pictureUrls
+      place {
+        id
+        name
+      }
+    }
+    place {
+      id
+      name
+      description
+      bannerUrl
+      pictureUrls
+      events {
+        id
+        name
+      }
+    }
+    error
+  }
 }
