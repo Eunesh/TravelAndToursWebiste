@@ -31,6 +31,13 @@ export type CreatePlacePayload = {
   place?: Maybe<Place>;
 };
 
+export type DeleteBlobPayload = {
+  __typename?: 'DeleteBlobPayload';
+  error?: Maybe<Array<Scalars['String']['output']>>;
+  event?: Maybe<Event>;
+  place?: Maybe<Place>;
+};
+
 export type Event = {
   __typename?: 'Event';
   bannerUrl?: Maybe<Scalars['String']['output']>;
@@ -47,7 +54,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createEvent?: Maybe<CreateEventPayload>;
   createPlace?: Maybe<CreatePlacePayload>;
-  deleteBlob?: Maybe<Scalars['String']['output']>;
+  deleteBlob?: Maybe<DeleteBlobPayload>;
   deleteEvent?: Maybe<Scalars['String']['output']>;
   deletePlace?: Maybe<Scalars['String']['output']>;
   updateEvent?: Maybe<Event>;
@@ -177,7 +184,7 @@ export type DeleteBlobMutationVariables = Exact<{
 }>;
 
 
-export type DeleteBlobMutation = { __typename?: 'Mutation', deleteBlob?: string | null };
+export type DeleteBlobMutation = { __typename?: 'Mutation', deleteBlob?: { __typename?: 'DeleteBlobPayload', error?: Array<string> | null, event?: { __typename?: 'Event', id: string, name?: string | null, description?: string | null, bannerUrl?: string | null, pictureUrls?: Array<string> | null, place?: { __typename?: 'Place', id: string, name?: string | null } | null } | null, place?: { __typename?: 'Place', id: string, name?: string | null, description?: string | null, bannerUrl?: string | null, pictureUrls?: Array<string> | null, events?: Array<{ __typename?: 'Event', id: string, name?: string | null }> | null } | null } | null };
 
 export type DeleteEventMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -354,7 +361,31 @@ export type CreatePlaceMutationResult = Apollo.MutationResult<CreatePlaceMutatio
 export type CreatePlaceMutationOptions = Apollo.BaseMutationOptions<CreatePlaceMutation, CreatePlaceMutationVariables>;
 export const DeleteBlobDocument = gql`
     mutation DeleteBlob($url: String!) {
-  deleteBlob(url: $url)
+  deleteBlob(url: $url) {
+    event {
+      id
+      name
+      description
+      bannerUrl
+      pictureUrls
+      place {
+        id
+        name
+      }
+    }
+    place {
+      id
+      name
+      description
+      bannerUrl
+      pictureUrls
+      events {
+        id
+        name
+      }
+    }
+    error
+  }
 }
     `;
 export type DeleteBlobMutationFn = Apollo.MutationFunction<DeleteBlobMutation, DeleteBlobMutationVariables>;

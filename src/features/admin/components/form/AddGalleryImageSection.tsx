@@ -5,6 +5,11 @@ import convertToBase64 from "../../utils/convertToBase64";
 
 //ICONS
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useDeleteBlobMutation } from "../../../../generated/graphql";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { updateEventInGrid } from "../../../events/slice/eventSlice";
+import { updatePlaceInGrid } from "../../../places/slice/placeSlice";
 //ICONS
 
 const RenderImage = ({ picture }: { picture: any }) => {
@@ -32,12 +37,17 @@ const RenderImage = ({ picture }: { picture: any }) => {
 };
 
 const AddGalleryImageSection = () => {
+  const [deleteBlob] = useDeleteBlobMutation();
   const [field, _meta, helper] = useField("pictures");
+
+  const dispatch = useDispatch();
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target?.files?.[0]) {
       const newFiles = Array.from(event.target.files);
-      const filesFromPrev = field.value.filter((value:any) => typeof value == 'string')
+      const filesFromPrev = field.value.filter(
+        (value: any) => typeof value == "string"
+      );
       helper.setValue([...newFiles, ...filesFromPrev]);
     }
   };
@@ -46,8 +56,28 @@ const AddGalleryImageSection = () => {
     const pictures = field.value.filter((_item: any) => true); // Making a shallow copy. Not don't use JSON.parse & stringify to make deep copy. (the content cannot be serialized)
     let picture = pictures[index];
     if (typeof picture == "string") {
+      deleteBlob({ variables: { url: picture } })
+        .then((response) => response.data)
+        .then((data) => data?.deleteBlob)
+        .then((data) => {
+          if (data?.error) {
+            toast.error(data.error);
+          } else {
+            if (data?.event) {
+              const event: any = data.event;
+              dispatch(updateEventInGrid(event));
+            } else if (data?.place) {
+              const place: any = data.place;
+              dispatch(updatePlaceInGrid(place));
+            }
+            toast.success("Image deleted successfully");
+            pictures.splice(index, 1);
+          }
+        })
+        .catch((error) => toast.error(error.message));
+    } else {
+      pictures.splice(index, 1);
     }
-    pictures.splice(index, 1);
     helper.setValue(pictures);
   };
 
