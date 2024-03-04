@@ -1,6 +1,6 @@
 import { Box, Flex, Image, Stack, Text } from "@chakra-ui/react";
 import { useField } from "formik";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import convertToBase64 from "../../utils/convertToBase64";
 
 // Upload image - image

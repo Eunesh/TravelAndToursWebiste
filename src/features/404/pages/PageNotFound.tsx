@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Button, Center, Stack, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";

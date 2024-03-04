@@ -1,4 +1,3 @@
-import React from "react";
 import { Stack } from "@chakra-ui/react";
 import SectionTitle from "./SectionTitle";
 import EventCarousel from "./EventCarousel";

@@ -1,4 +1,3 @@
-import React from "react";
 import { Container, Stack } from "@chakra-ui/react";
 import PlacesAndEventsBanner from "../../../components/common/banner/PlacesAndEventsBanner";
 import LocationBody from "../components/LocationBody";

@@ -1,4 +1,3 @@
-import React from "react";
 import { Avatar, Container, Flex, Show, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import NavItems from "./NavItems";
